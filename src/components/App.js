@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import '../App.css'
-// import { getCategories, getAllPosts, getPostsForCategory } from '../utils/api'
 import * as CategoriesAPI from '../utils/api/categories'
 import * as PostsAPI from '../utils/api/posts'
 
 class App extends Component {
 
   componentDidMount = () => {
+
+    // TESTING API!
+    const testID = "8xf0y6ziyjabvozdd253nd"
+    const voteOption = "upVote"
 
     CategoriesAPI.getCategories()
       .then(response => console.log('Response Categories: ', response))
@@ -17,7 +20,7 @@ class App extends Component {
     PostsAPI.getPostsForCategory('redux')
       .then(response => console.log('Response Posts for Category: ', response))
 
-    PostsAPI.getPost('8xf0y6ziyjabvozdd253nd')
+    PostsAPI.getPost(testID)
       .then(response => console.log('Response Single Post: ', response))
 
     let newPost = {
@@ -31,6 +34,11 @@ class App extends Component {
 
     PostsAPI.addPost(newPost)
       .then(response => console.log('Response Add Post: ', response))
+
+    PostsAPI.votePost(testID, voteOption)
+      .then(response => console.log('Response Vote Post: ', response))
+
+
   }
 
   render() {

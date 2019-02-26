@@ -209,6 +209,7 @@ app.delete('/posts/:id', (req, res) => {
 
 app.post('/posts/:id', bodyParser.json(), (req, res) => {
     const { option } = req.body
+    console.log('DUDE: ', req.body)
     const id = req.params.id
     posts.vote(req.token, id, option)
       .then(
