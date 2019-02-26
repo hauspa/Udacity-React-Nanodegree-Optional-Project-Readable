@@ -7,8 +7,11 @@ import * as CommentsAPI from '../utils/api/comments'
 class App extends Component {
 
   componentDidMount = () => {
-
     // TESTING API!
+    // this.testAPI()
+  }
+
+  testAPI = () => {
     const testID = "8xf0y6ziyjabvozdd253nd"
     const voteOption = "upVote"
     const commentID = "894tuq4ut84ut8v4t8wun89g"
@@ -73,6 +76,7 @@ class App extends Component {
 
     CommentsAPI.deleteComment('008')
       .then(response => console.log('Response Delete Comment: ', response))
+
   }
 
   render() {
