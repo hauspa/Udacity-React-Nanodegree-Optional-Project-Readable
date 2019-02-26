@@ -45,8 +45,21 @@ class App extends Component {
     // PostsAPI.deletePost('007')
     //   .then(response => console.log('Response Delete Post: ', response))
 
+
+    //Comments
     CommentsAPI.getCommentsForPost(testID)
       .then(response => console.log('Response Get Comments: ', response))
+
+    const newComment = {
+      id: '008',
+      timestamp: Date.now(),
+      body: "Yo, I'm a comment, dude!",
+      author: 'Michael Scarn',
+      parentId: testID,
+    }
+
+    CommentsAPI.addComment(newComment)
+      .then(response => console.log('Response Add Comments: ', response))
 
   }
 
