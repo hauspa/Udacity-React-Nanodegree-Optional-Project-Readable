@@ -21,4 +21,17 @@ export const addComment = (comment) =>
 export const getComment = (id) =>
   fetch(`${url}/comments/${id}`, { headers })
     .then(res => res.json())
-    .then(data => data) // object of comment
+    .then(data => data) // = object of comment
+
+
+export const voteComment = (id, option) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
+    .then(data => data) // = object of comment

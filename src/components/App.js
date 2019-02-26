@@ -65,7 +65,8 @@ class App extends Component {
     CommentsAPI.getComment(commentID)
       .then(response => console.log('Response Get Single Comment: ', response))
 
-    
+    CommentsAPI.voteComment(commentID, voteOption)
+      .then(response => console.log('Response Vote Comment: ', response))
 
   }
 
