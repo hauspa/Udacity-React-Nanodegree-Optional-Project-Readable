@@ -38,6 +38,10 @@ class App extends Component {
     PostsAPI.votePost(testID, voteOption)
       .then(response => console.log('Response Vote Post: ', response))
 
+    PostsAPI.editPost(testID, 'BETTER TITLE', 'BETTER BODY for this post, mofo!')
+      .then(response => console.log('Response Edit Post: ', response))
+
+
 
   }
 
