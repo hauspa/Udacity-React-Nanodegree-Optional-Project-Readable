@@ -19,6 +19,18 @@ class App extends Component {
 
     PostsAPI.getPost('8xf0y6ziyjabvozdd253nd')
       .then(response => console.log('Response Single Post: ', response))
+
+    let newPost = {
+      id: '007',
+      timestamp: Date.now(),
+      title: 'New Post Title',
+      body: 'New Post Body dude',
+      author: 'Michael Scarn',
+      category: 'redux'
+    }
+
+    PostsAPI.addPost(newPost)
+      .then(response => console.log('Response Add Post: ', response))
   }
 
   render() {

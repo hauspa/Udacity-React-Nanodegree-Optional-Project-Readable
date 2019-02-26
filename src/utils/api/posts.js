@@ -17,16 +17,16 @@ export const getPost = (id) =>
     .then(res => res.json())
     .then(data => data) // = object
 
-// export const addPost = () =>
-//   fetch(`${url}/posts`, {
-//     method: 'POST',
-//     headers: {
-//       ...headers,
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({ query })
-//   }).then(res => res.json())
-//     .then(data => data.)
+export const addPost = (post) =>
+  fetch(`${url}/posts`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify( post )
+  }).then(res => res.json())
+    .then(data => data) // = object
 
 // export const votePost = (id) =>
 //   fetch(`${url}/posts/${id}`, {
