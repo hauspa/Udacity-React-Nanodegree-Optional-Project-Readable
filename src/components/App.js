@@ -17,7 +17,8 @@ class App extends Component {
     PostsAPI.getPostsForCategory('redux')
       .then(response => console.log('Response Posts for Category: ', response))
 
-    
+    PostsAPI.getPost('8xf0y6ziyjabvozdd253nd')
+      .then(response => console.log('Response Single Post: ', response))
   }
 
   render() {
