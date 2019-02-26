@@ -32,8 +32,8 @@ class App extends Component {
       category: 'redux'
     }
 
-    PostsAPI.addPost(newPost)
-      .then(response => console.log('Response Add Post: ', response))
+    // PostsAPI.addPost(newPost)
+    //   .then(response => console.log('Response Add Post: ', response))
 
     PostsAPI.votePost(testID, voteOption)
       .then(response => console.log('Response Vote Post: ', response))
@@ -41,7 +41,8 @@ class App extends Component {
     PostsAPI.editPost(testID, 'BETTER TITLE', 'BETTER BODY for this post, mofo!')
       .then(response => console.log('Response Edit Post: ', response))
 
-
+    PostsAPI.deletePost('007')
+      .then(response => console.log('Response Delete Post: ', response))
 
   }
 
