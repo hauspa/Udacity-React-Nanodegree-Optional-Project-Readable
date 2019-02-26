@@ -59,8 +59,8 @@ class App extends Component {
       parentId: testID,
     }
 
-    CommentsAPI.addComment(newComment)
-      .then(response => console.log('Response Add Comments: ', response))
+    // CommentsAPI.addComment(newComment)
+    //   .then(response => console.log('Response Add Comments: ', response))
 
     CommentsAPI.getComment(commentID)
       .then(response => console.log('Response Get Single Comment: ', response))
@@ -68,6 +68,11 @@ class App extends Component {
     CommentsAPI.voteComment(commentID, voteOption)
       .then(response => console.log('Response Vote Comment: ', response))
 
+    CommentsAPI.editComment(commentID, Date.now(), 'YOOO NEW COMMENT, DUDE')
+      .then(response => console.log('Response Edit Comment: ', response))
+
+    CommentsAPI.deleteComment('008')
+      .then(response => console.log('Response Delete Comment: ', response))
   }
 
   render() {

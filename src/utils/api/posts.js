@@ -56,6 +56,7 @@ export const editPost = (id, title, body) =>
   }).then(res => res.json())
     .then(data => data) // = object of edited post
 
+
 export const deletePost = (id) =>
   fetch(`${url}/posts/${id}`, {
     method: 'DELETE',

@@ -18,6 +18,7 @@ export const addComment = (comment) =>
   }).then(res => res.json())
     .then(data => data) // = object of comment
 
+
 export const getComment = (id) =>
   fetch(`${url}/comments/${id}`, { headers })
     .then(res => res.json())
@@ -33,5 +34,29 @@ export const voteComment = (id, option) =>
       'Accept': 'application/json',
     },
     body: JSON.stringify({ option })
+  }).then(res => res.json())
+    .then(data => data) // = object of comment
+
+export const editComment = (id, timestamp, body) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({ id, timestamp, body })
+  }).then(res => res.json())
+    .then(data => data) // = object of comment
+
+
+export const deleteComment = (id) =>
+  fetch(`${url}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
   }).then(res => res.json())
     .then(data => data) // = object of comment
