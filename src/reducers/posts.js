@@ -11,8 +11,10 @@ export default function posts(state = {}, action) {
         ...action.posts
       }
     case GET_POSTS_FOR_CATEGORY :
-      return {
-        
-      }
+      // return {
+      //
+      // }
+    default :
+      return state
   }
 }
