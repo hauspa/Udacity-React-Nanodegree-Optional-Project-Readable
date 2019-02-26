@@ -11,6 +11,7 @@ class App extends Component {
     // TESTING API!
     const testID = "8xf0y6ziyjabvozdd253nd"
     const voteOption = "upVote"
+    const commentID = "894tuq4ut84ut8v4t8wun89g"
 
     CategoriesAPI()
       .then(response => console.log('Response Categories: ', response))
@@ -60,6 +61,11 @@ class App extends Component {
 
     CommentsAPI.addComment(newComment)
       .then(response => console.log('Response Add Comments: ', response))
+
+    CommentsAPI.getComment(commentID)
+      .then(response => console.log('Response Get Single Comment: ', response))
+
+    
 
   }
 
