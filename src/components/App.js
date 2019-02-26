@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import '../App.css'
-import * as CategoriesAPI from '../utils/api/categories'
+import { getCategories as CategoriesAPI }  from '../utils/api/categories'
 import * as PostsAPI from '../utils/api/posts'
+import * as CommentsAPI from '../utils/api/comments'
 
 class App extends Component {
 
@@ -11,7 +12,7 @@ class App extends Component {
     const testID = "8xf0y6ziyjabvozdd253nd"
     const voteOption = "upVote"
 
-    CategoriesAPI.getCategories()
+    CategoriesAPI()
       .then(response => console.log('Response Categories: ', response))
 
     PostsAPI.getAllPosts()
@@ -32,8 +33,8 @@ class App extends Component {
       category: 'redux'
     }
 
-    // PostsAPI.addPost(newPost)
-    //   .then(response => console.log('Response Add Post: ', response))
+    PostsAPI.addPost(newPost)
+      .then(response => console.log('Response Add Post: ', response))
 
     PostsAPI.votePost(testID, voteOption)
       .then(response => console.log('Response Vote Post: ', response))
@@ -41,8 +42,11 @@ class App extends Component {
     PostsAPI.editPost(testID, 'BETTER TITLE', 'BETTER BODY for this post, mofo!')
       .then(response => console.log('Response Edit Post: ', response))
 
-    PostsAPI.deletePost('007')
-      .then(response => console.log('Response Delete Post: ', response))
+    // PostsAPI.deletePost('007')
+    //   .then(response => console.log('Response Delete Post: ', response))
+
+    CommentsAPI.getCommentsForPost(testID)
+      .then(response => console.log('Response Get Comments: ', response))
 
   }
 
