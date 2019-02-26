@@ -1,29 +1,15 @@
+import { url, headers } from './settings'
 
-const url = 'http://localhost:3001' || `${process.env.REACT_APP_BACKEND}`;
-
-const headers = {
-  'Authorization': 'whatever-you-want'
-}
-
-// Categories
-
-export const getCategories = () =>
-  fetch(`${url}/categories`, { headers })
-    .then(res => res.json())
-    .then(data => data.categories)
-
-
-// Posts
 export const getAllPosts = () =>
   fetch(`${url}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
 
 
-// export const getPostsForCategory = (category) =>
-//   fetch(`/${category}/posts`, { headers })
-//     .then(res => res.json())
-//     .then(data => data.posts)
+export const getPostsForCategory = (category) =>
+  fetch(`${url}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
 //
 //
 // export const getPost = (id) =>
