@@ -3,12 +3,22 @@ import '../App.css'
 import { getCategories as CategoriesAPI }  from '../utils/api/categories'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
+import { connect } from 'react-redux'
+
+import { getAllCategories } from '../actions/categories'
 
 class App extends Component {
 
   componentDidMount = () => {
     // TESTING API!
     // this.testAPI()
+
+    CategoriesAPI()
+      // .then((categories) => console.log('CATEGORIES:', categories ))
+      .then((categories) => this.props.loadCategories(categories))
+
+    // PostsAPI.getAllPosts()
+    //   .then()
   }
 
   testAPI = () => {
@@ -76,14 +86,46 @@ class App extends Component {
 
     CommentsAPI.deleteComment('008')
       .then(response => console.log('Response Delete Comment: ', response))
+  }
 
+  log = () => {
+    console.log('LOG: ', this.props.categories)
   }
 
   render() {
+    let { categories, isLoading } = this.props
+    console.log('RENDER CATEGORIES: ', categories)
+    console.log('isLoading: ', isLoading)
     return (
-      <div>App</div>
+      <div>
+        <p>App</p>
+        {
+          isLoading
+            ? <p>No Categories loaded!</p>
+            : categories.map(category => (
+              <div key={category.path}>{category.name}</div>
+            ))
+        }
+        <button onClick={this.log}>Log Categories</button>
+      </div>
     )
   }
 }
 
-export default App
+
+function mapStateToProps({ categories }) {
+  console.log('mapStateToProps: ', categories)
+  console.log('mapStateToProps isLoading: ', categories.length < 1)
+  return {
+    categories,
+    isLoading: categories.length < 1,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadCategories: (categories) => dispatch(getAllCategories(categories))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
