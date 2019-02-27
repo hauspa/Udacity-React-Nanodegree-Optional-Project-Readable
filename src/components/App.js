@@ -6,6 +6,7 @@ import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 
 import { getAllCategories } from '../actions/categories'
+import { getAllPosts } from '../actions/posts'
 
 class App extends Component {
 
@@ -17,8 +18,12 @@ class App extends Component {
       // .then((categories) => console.log('CATEGORIES:', categories ))
       .then((categories) => this.props.loadCategories(categories))
 
-    // PostsAPI.getAllPosts()
-    //   .then()
+    PostsAPI.getAllPosts()
+      .then(posts => {
+        console.log('POSTS:', posts )
+        return posts
+      })
+      .then(posts => this.props.loadPosts(posts))
   }
 
   testAPI = () => {
@@ -89,21 +94,31 @@ class App extends Component {
   }
 
   log = () => {
-    console.log('LOG: ', this.props.categories)
+    console.log('LOG: ', Object.values(this.props.posts))
   }
 
   render() {
-    let { categories, isLoading } = this.props
+    let { categories, posts, isLoading } = this.props
     console.log('RENDER CATEGORIES: ', categories)
     console.log('isLoading: ', isLoading)
     return (
       <div>
         <p>App</p>
+        <p>Categories</p>
         {
           isLoading
-            ? <p>No Categories loaded!</p>
+            ? <p>Still loading data...</p>
             : categories.map(category => (
               <div key={category.path}>{category.name}</div>
+            ))
+        }
+        <br></br>
+        <p>Posts</p>
+        {
+          isLoading
+            ? <p>Still loading data...</p>
+            : Object.values(posts).map(post => (
+              <div key={post.id}>{post.title}</div>
             ))
         }
         <button onClick={this.log}>Log Categories</button>
@@ -113,18 +128,20 @@ class App extends Component {
 }
 
 
-function mapStateToProps({ categories }) {
+function mapStateToProps({ categories, posts }) {
   console.log('mapStateToProps: ', categories)
   console.log('mapStateToProps isLoading: ', categories.length < 1)
   return {
     categories,
-    isLoading: categories.length < 1,
+    posts,
+    isLoading: categories.length < 1 || posts.length < 1,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    loadCategories: (categories) => dispatch(getAllCategories(categories))
+    loadCategories: (categories) => dispatch(getAllCategories(categories)),
+    loadPosts: (posts) => dispatch(getAllPosts(posts))
   }
 }
 
