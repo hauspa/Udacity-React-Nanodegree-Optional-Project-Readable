@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
 
-class Category extends Component {
+class PostsByCategory extends Component {
 
   state = {
     posts: [],
@@ -49,4 +49,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Category)
+export default connect(mapStateToProps, mapDispatchToProps)(PostsByCategory)

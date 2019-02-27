@@ -5,14 +5,15 @@ import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 
-import Category from './Category'
+// Components
+import Home from './Home'
+import PostsByCategory from './PostsByCategory'
 import EditPost from './EditPost'
 
-import { getAllCategories } from '../actions/categories'
-import { getAllPosts } from '../actions/posts'
 import {
   handleInitialData,
 } from '../actions/shared'
+
 
 class App extends Component {
 
@@ -90,39 +91,19 @@ class App extends Component {
       .then(response => console.log('Response Delete Comment: ', response))
   }
 
-  log = () => {
-    const { posts } = this.props
-    console.log('LOG: ', Object.values(posts))
-
-  }
-
   render() {
-    let { categories, posts, isLoading } = this.props
+    let { isLoading, categories, posts } = this.props
     return (
       <div>
-        <p>App</p>
-        <p>Categories</p>
         {
           isLoading
-            ? <p>Still loading data...</p>
-            : categories.map(category => (
-              <div key={category.path}>{category.name}</div>
-            ))
+            ? null
+            : (
+              // <Home />
+              // <PostsByCategory />
+              <EditPost />
+            )
         }
-        <br></br>
-        <p>Posts</p>
-        {
-          isLoading
-            ? <p>Still loading data...</p>
-            : Object.values(posts).map(post => (
-                <div key={post.id}>{post.title}</div>
-              ))
-        }
-        <button onClick={this.log}>Log Categories</button>
-
-        <Category />
-
-        <EditPost />
       </div>
     )
   }
@@ -131,8 +112,6 @@ class App extends Component {
 
 function mapStateToProps({ categories, posts }) {
   return {
-    categories,
-    posts,
     isLoading: categories.length < 1 || posts.length < 1,
   }
 }
