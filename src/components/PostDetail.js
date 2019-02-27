@@ -52,6 +52,7 @@ class PostDetail extends Component {
                 {/* TODO: Icon for voting up/down */}
                 <button onClick={this.handleClick} name='upVote'>Vote Up</button>
                 <button onClick={this.handleClick} name='downVote'>Vote Down</button>
+                <p>Vote Score: {post.voteScore}</p>
 
                 <p>{post.body}</p>
 
@@ -72,6 +73,7 @@ class PostDetail extends Component {
                                <div>Body: {comment.body}</div>
                                <button onClick={this.handleClick} name='upVote'>Vote Up</button>
                                <button onClick={this.handleClick} name='downVote'>Vote Down</button>
+                               <p>Vote Score: {comment.voteScore}</p>
                                <br></br>
                                <br></br>
                             </div>
