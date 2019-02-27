@@ -1,6 +1,4 @@
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
-export const GET_POSTS_FOR_CATEGORY = 'GET_POSTS_FOR_CATEGORY'
-export const GET_POST = 'GET_POST'
 export const ADD_POST = 'ADD_POST'
 export const VOTE_POST = 'VOTE_POST'
 export const EDIT_POST = 'EDIT_POST'
@@ -10,20 +8,6 @@ export function getAllPosts(posts) {
   return {
     type: GET_ALL_POSTS,
     posts,
-  }
-}
-
-export function getPostsForCategory(category) {
-  return {
-    type: GET_POSTS_FOR_CATEGORY,
-    category,
-  }
-}
-
-export function getPost(id) {
-  return {
-    type: GET_POST,
-    id,
   }
 }
 

@@ -1,5 +1,7 @@
 import { getAllCategories } from './categories'
-import { getAllPosts } from './posts'
+import {
+  getAllPosts
+} from './posts'
 import { getCategories as CategoriesAPI }  from '../utils/api/categories'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'

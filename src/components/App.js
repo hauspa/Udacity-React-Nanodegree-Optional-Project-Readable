@@ -7,7 +7,9 @@ import { connect } from 'react-redux'
 
 import { getAllCategories } from '../actions/categories'
 import { getAllPosts } from '../actions/posts'
-import { handleInitialData } from '../actions/shared'
+import {
+  handleInitialData, handleGetPostsForCategory,
+} from '../actions/shared'
 
 class App extends Component {
 
@@ -86,13 +88,15 @@ class App extends Component {
   }
 
   log = () => {
-    console.log('LOG: ', Object.values(this.props.posts))
+    const { posts, getPostsForCategory } = this.props
+    console.log('LOG: ', Object.values(posts))
+
+    getPostsForCategory('react')
+      .then((filteredPosts) => console.log('Posts for Category: ', filteredPosts))
   }
 
   render() {
     let { categories, posts, isLoading } = this.props
-    console.log('RENDER CATEGORIES: ', categories)
-    console.log('isLoading: ', isLoading)
     return (
       <div>
         <p>App</p>
@@ -131,6 +135,8 @@ function mapStateToProps({ categories, posts }) {
 function mapDispatchToProps(dispatch) {
   return {
     getInitialData: () => dispatch(handleInitialData()),
+    getPostsForCategory: (category) => PostsAPI.getPostsForCategory(category), // don't need Redux for just getting an item, as that would modify the store!
+
   }
 }
 
