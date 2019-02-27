@@ -5,10 +5,12 @@ import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 
+import Category from './Category'
+
 import { getAllCategories } from '../actions/categories'
 import { getAllPosts } from '../actions/posts'
 import {
-  handleInitialData, handleGetPostsForCategory,
+  handleInitialData,
 } from '../actions/shared'
 
 class App extends Component {
@@ -88,11 +90,9 @@ class App extends Component {
   }
 
   log = () => {
-    const { posts, getPostsForCategory } = this.props
+    const { posts } = this.props
     console.log('LOG: ', Object.values(posts))
 
-    getPostsForCategory('react')
-      .then((filteredPosts) => console.log('Posts for Category: ', filteredPosts))
   }
 
   render() {
@@ -114,10 +114,12 @@ class App extends Component {
           isLoading
             ? <p>Still loading data...</p>
             : Object.values(posts).map(post => (
-              <div key={post.id}>{post.title}</div>
-            ))
+                <div key={post.id}>{post.title}</div>
+              ))
         }
         <button onClick={this.log}>Log Categories</button>
+
+        <Category />
       </div>
     )
   }
@@ -135,8 +137,6 @@ function mapStateToProps({ categories, posts }) {
 function mapDispatchToProps(dispatch) {
   return {
     getInitialData: () => dispatch(handleInitialData()),
-    getPostsForCategory: (category) => PostsAPI.getPostsForCategory(category), // don't need Redux for just getting an item, as that would modify the store!
-
   }
 }
 
