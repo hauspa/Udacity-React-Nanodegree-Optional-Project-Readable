@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import Home from './Home'
 import PostsByCategory from './PostsByCategory'
 import EditPost from './EditPost'
+import PostDetail from './PostDetail'
 
 import {
   handleInitialData,
@@ -101,7 +102,8 @@ class App extends Component {
             : (
               // <Home />
               // <PostsByCategory />
-              <EditPost />
+              // <EditPost />
+              <PostDetail />
             )
         }
       </div>

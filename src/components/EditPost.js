@@ -36,6 +36,7 @@ class EditPost extends Component {
     // TODO: get param id from Router, to see whether edit or add mode.
     // TODO: then when it's edit mode, fire the API method with .then to update the state to fill in the form!
     // TODO: make sure there is no bug/error in console when using API, when the ID doesn't exist!
+    // TODO: if possible, instead of using API, use Redux store
 
     getPost(testID)
     // getPost('006')
