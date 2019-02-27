@@ -6,6 +6,7 @@ import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 
 import Category from './Category'
+import EditPost from './EditPost'
 
 import { getAllCategories } from '../actions/categories'
 import { getAllPosts } from '../actions/posts'
@@ -120,6 +121,8 @@ class App extends Component {
         <button onClick={this.log}>Log Categories</button>
 
         <Category />
+
+        <EditPost />
       </div>
     )
   }
