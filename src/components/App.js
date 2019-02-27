@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 
 import { getAllCategories } from '../actions/categories'
 import { getAllPosts } from '../actions/posts'
+import { handleInitialData } from '../actions/shared'
 
 class App extends Component {
 
@@ -14,16 +15,18 @@ class App extends Component {
     // TESTING API!
     // this.testAPI()
 
-    CategoriesAPI()
-      // .then((categories) => console.log('CATEGORIES:', categories ))
-      .then((categories) => this.props.loadCategories(categories))
+    // CategoriesAPI()
+    //   // .then((categories) => console.log('CATEGORIES:', categories ))
+    //   .then((categories) => this.props.loadCategories(categories))
+    //
+    // PostsAPI.getAllPosts()
+    //   .then(posts => {
+    //     console.log('POSTS:', posts )
+    //     return posts
+    //   })
+    //   .then(posts => this.props.loadPosts(posts))
 
-    PostsAPI.getAllPosts()
-      .then(posts => {
-        console.log('POSTS:', posts )
-        return posts
-      })
-      .then(posts => this.props.loadPosts(posts))
+    this.props.getInitialData()
   }
 
   testAPI = () => {
@@ -141,7 +144,8 @@ function mapStateToProps({ categories, posts }) {
 function mapDispatchToProps(dispatch) {
   return {
     loadCategories: (categories) => dispatch(getAllCategories(categories)),
-    loadPosts: (posts) => dispatch(getAllPosts(posts))
+    loadPosts: (posts) => dispatch(getAllPosts(posts)),
+    getInitialData: () => dispatch(handleInitialData()),
   }
 }
 
