@@ -47,12 +47,11 @@ export function voteComment(id, option) {
   }
 }
 
-export function editComment(id, timestamp, body) {
+export function editComment(id, comment) {
   return {
     type: EDIT_COMMENT,
     id,
-    timestamp,
-    body,
+    comment
   }
 }
 

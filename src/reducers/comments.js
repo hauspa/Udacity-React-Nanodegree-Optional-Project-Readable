@@ -31,6 +31,17 @@ export default function comments(state = {}, action) {
                       : state[action.id].voteScore - 1,
         }
       }
+    case EDIT_COMMENT :
+      const { author, body, timestamp } = action.comment
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          author,
+          body,
+          timestamp,
+        }
+      }
     default :
       return state
   }

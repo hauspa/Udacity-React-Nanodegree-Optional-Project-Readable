@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCommentsForPost } from '../actions/comments'
 import {
   handleGettingComments,
   handleVotingComment,
 } from '../actions/shared'
+import EditComment from './EditComment'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -46,6 +46,12 @@ class Comments extends Component {
                 <br></br>
 
                 <button>Add Comment</button>
+
+                <br></br>
+                
+                <EditComment />
+
+                <br></br>
               </div>
             )
         }

@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
-import * as CommentsAPI from '../utils/api/comments'
-import { getCommentsForPost } from '../actions/comments'
 import {
-  handleGettingComments,
   handleVotingPost,
-  handleVotingComment,
 } from '../actions/shared'
 import Comments from './Comments'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
-// const commentID = "894tuq4ut84ut8v4t8wun89g"
 
 class PostPage extends Component {
 
@@ -67,11 +62,7 @@ class PostPage extends Component {
 }
 
 function mapStateToProps({ posts }) {
-  // console.log('posts: ', Object.values(posts))
-  // console.log('comments: ', Object.values(comments))
-  // console.log('comments: ', comments) // -> is still empty!
   const post = Object.values(posts).filter(post => post.id === testID)[0]
-  // const comments = Object.values(comments).filter(comment => comment.parentId === testID)
   console.log('post: ', post)
   return {
     post, // TODO: Could use both API & Redux together!!!

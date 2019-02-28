@@ -4,7 +4,7 @@ import {
   getAllPosts, votePost, editPost, addPost, deletePost,
 } from './posts'
 import {
-  getCommentsForPost, voteComment,
+  getCommentsForPost, voteComment, editComment, addComment,
 } from './comments'
 
 // API methods
@@ -68,5 +68,12 @@ export function handleDeletingPost(id) {
   return (dispatch) => {
     return PostsAPI.deletePost(id)
       .then(() => dispatch(deletePost(id)))
+  }
+}
+
+export function handleEditingComment(id, comment) {
+  return (dispatch) => {
+    return CommentsAPI.editComment(id, comment)
+      .then(() => dispatch(editComment(id, comment)))
   }
 }

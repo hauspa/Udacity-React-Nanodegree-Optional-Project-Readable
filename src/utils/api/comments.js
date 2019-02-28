@@ -37,17 +37,19 @@ export const voteComment = (id, option) =>
   }).then(res => res.json())
     .then(data => data) // = object of comment
 
-export const editComment = (id, timestamp, body) =>
-  fetch(`${url}/comments/${id}`, {
+export const editComment = (id, comment) => {
+  const { author, body, timestamp } = comment
+  return fetch(`${url}/comments/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify({ id, timestamp, body })
+    body: JSON.stringify({ author, body, timestamp })
   }).then(res => res.json())
     .then(data => data) // = object of comment
+}
 
 
 export const deleteComment = (id) =>
