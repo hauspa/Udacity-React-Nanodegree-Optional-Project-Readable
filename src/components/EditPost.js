@@ -4,6 +4,7 @@ import * as PostsAPI from '../utils/api/posts'
 import {
   handleEditingPost, handleAddingPost,
 } from '../actions/shared'
+import uuidv1 from 'uuid/v1'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -72,7 +73,7 @@ class EditPost extends Component {
     else{ // = createPost method
       newPost = {
         ...newPost,
-        id: '009',
+        id: uuidv1(),
         timestamp: Date.now(),
       }
       addPost(newPost)

@@ -42,7 +42,7 @@ export default function posts(state = {}, action) {
       }
     case ADD_POST :
       let object = {
-        [action.id]: action.post
+        [action.post.id]: action.post
       }
       return {
         ...state,
