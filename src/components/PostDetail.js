@@ -5,10 +5,12 @@ import * as CommentsAPI from '../utils/api/comments'
 import { getCommentsForPost } from '../actions/comments'
 import {
   handleGettingComments,
-  handleVoteComment,
+  handleVotingPost,
+  handleVotingComment,
 } from '../actions/shared'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
+const commentID = "894tuq4ut84ut8v4t8wun89g"
 
 class PostDetail extends Component {
 
@@ -27,28 +29,15 @@ class PostDetail extends Component {
   handlePostVote = (e) => {
     e.preventDefault()
     const vote = e.target.name
-    console.log('Voted: ', vote)
     // TODO: can only once once per session/post.
-    // PostsAPI.votePost(testID, vote)
-      // .then(() => this.setState((prevState) => ({ // since using API and not Redux, gotta update local state
-      //   ...prevState,
-      //   post: {
-      //     ...prevState.post,
-      //     voteScore: vote === 'upVote'
-      //                 ? prevState.post.voteScore + 1
-      //                 : prevState.post.voteScore - 1,
-      //   }
-      // })))
-      this.props.voteComment(testID, vote)
-
-      // .then((post) => this.props.dispatch()) // if use Redux instead!
+      this.props.votePost(testID, vote)
   }
 
   handleCommentVote = (e) => {
     e.preventDefault()
     const vote = e.target.name
-    console.log('Voted: ', vote)
-    // vote === 'upVote' ? :
+    // TODO: can only once once per session/comment.
+    this.props.voteComment(commentID, vote)
   }
 
   render(){
@@ -85,8 +74,8 @@ class PostDetail extends Component {
                             <div key={comment.id}>
                                <div>Author: {comment.author}</div>
                                <div>Body: {comment.body}</div>
-                               <button onClick={this.handleClick} name='upVote'>Vote Up</button>
-                               <button onClick={this.handleClick} name='downVote'>Vote Down</button>
+                               <button onClick={this.handleCommentVote} name='upVote'>Vote Up</button>
+                               <button onClick={this.handleCommentVote} name='downVote'>Vote Down</button>
                                <p>Vote Score: {comment.voteScore}</p>
                                <br></br>
                             </div>
@@ -125,7 +114,8 @@ function mapDispatchToProps(dispatch) {
     // use API to get post instead of mapStateToProps, because get comments count automatically!
     loadPost: (id) => PostsAPI.getPost(id),
     loadComments: (id) => dispatch(handleGettingComments(id)),
-    voteComment: (id, option) => dispatch(handleVoteComment(id, option))
+    votePost: (id, option) => dispatch(handleVotingPost(id, option)),
+    voteComment: (id, option) => dispatch(handleVotingComment(id, option)),
   }
 }
 

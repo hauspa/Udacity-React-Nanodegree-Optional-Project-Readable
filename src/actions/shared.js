@@ -3,7 +3,9 @@ import { getAllCategories } from './categories'
 import {
   getAllPosts, votePost,
 } from './posts'
-import { getCommentsForPost } from './comments'
+import {
+  getCommentsForPost, voteComment
+} from './comments'
 
 // API methods
 import { getCategories as CategoriesAPI }  from '../utils/api/categories'
@@ -34,10 +36,17 @@ export function handleGettingComments(id) {
   }
 }
 
-export function handleVoteComment(id, option) {
+export function handleVotingPost(id, option) {
   return (dispatch) => {
     return PostsAPI.votePost(id, option)
       // .then((post) => console.log('new Score: ', post.voteScore))
       .then(() => dispatch(votePost(id, option)))
+  }
+}
+
+export function handleVotingComment(id, option) {
+  return (dispatch) => {
+    return CommentsAPI.voteComment(id, option)
+      .then(() => dispatch(voteComment(id, option)))
   }
 }

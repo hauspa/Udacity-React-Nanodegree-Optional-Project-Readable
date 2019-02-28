@@ -15,15 +15,21 @@ export default function comments(state = {}, action) {
         }
         objects = {...objects, ...newObject}
       })
-      console.log("COMMENTS ACTION", objects)
       return {
         ...state,
         ...objects
       }
-      // return action.comments
     case VOTE_COMMENT :
+      console.log('STATE comments: ', state)
+      console.log('STATE comment ID: ', action.id)
       return {
-
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          voteScore: action.option === 'upVote'
+                      ? state[action.id].voteScore + 1
+                      : state[action.id].voteScore - 1,
+        }
       }
     default :
       return state
