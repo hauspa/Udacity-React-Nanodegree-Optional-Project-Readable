@@ -3,33 +3,25 @@ import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
 import { getCommentsForPost } from '../actions/comments'
-import { handleGettingComments } from '../actions/shared'
+import {
+  handleGettingComments,
+  handleVoteComment,
+} from '../actions/shared'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
 class PostDetail extends Component {
 
-  state = {
-    post: {},
-    comments: {},
-  }
-
   componentDidMount = () => {
     const { loadPost, loadComments } = this.props
 
-    loadPost(testID)
-      .then((post) => this.setState((prevState) => ({
-        ...prevState,
-        post
-      })))
+    // loadPost(testID)
+    //   .then((post) => this.setState((prevState) => ({
+    //     ...prevState,
+    //     post
+    //   })))
 
-    // loadComments(testID)
-    //   // .then((comments) => this.setState((prevState) => ({
-    //   //   ...prevState,
-    //   //   comments,
-    //   // })))
-    //   .then((comments) => this.props.getComments(comments))
-    this.props.dude(testID)
+    loadComments(testID)
   }
 
   handlePostVote = (e) => {
@@ -37,16 +29,18 @@ class PostDetail extends Component {
     const vote = e.target.name
     console.log('Voted: ', vote)
     // TODO: can only once once per session/post.
-    PostsAPI.votePost(testID, vote)
-      .then(() => this.setState((prevState) => ({ // since using API and not Redux, gotta update local state
-        ...prevState,
-        post: {
-          ...prevState.post,
-          voteScore: vote === 'upVote'
-                      ? prevState.post.voteScore + 1
-                      : prevState.post.voteScore - 1,
-        }
-      })))
+    // PostsAPI.votePost(testID, vote)
+      // .then(() => this.setState((prevState) => ({ // since using API and not Redux, gotta update local state
+      //   ...prevState,
+      //   post: {
+      //     ...prevState.post,
+      //     voteScore: vote === 'upVote'
+      //                 ? prevState.post.voteScore + 1
+      //                 : prevState.post.voteScore - 1,
+      //   }
+      // })))
+      this.props.voteComment(testID, vote)
+
       // .then((post) => this.props.dispatch()) // if use Redux instead!
   }
 
@@ -58,12 +52,11 @@ class PostDetail extends Component {
   }
 
   render(){
-    const { post } = this.state
-    const { comments } = this.props
+    const { comments, post } = this.props
     return (
       <div>
         {
-          post === {}
+          post === undefined
             ? null
             : (
               <div>
@@ -115,15 +108,14 @@ class PostDetail extends Component {
 }
 
 function mapStateToProps({ posts, comments }) {
-  console.log('posts: ', Object.values(posts))
+  // console.log('posts: ', Object.values(posts))
   // console.log('comments: ', Object.values(comments))
-  console.log('comments: ', comments) // -> is still empty!
-  // TODO: need to get comments per post!! use API here!!
+  // console.log('comments: ', comments) // -> is still empty!
   const post = Object.values(posts).filter(post => post.id === testID)[0]
   // const comments = Object.values(comments).filter(comment => comment.parentId === testID)
   console.log('post: ', post)
   return {
-    post,
+    post, // TODO: Could use both API & Redux together!!!
     comments,
   }
 }
@@ -132,9 +124,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // use API to get post instead of mapStateToProps, because get comments count automatically!
     loadPost: (id) => PostsAPI.getPost(id),
-    //loadComments: (id) => CommentsAPI.getCommentsForPost(id),
-    //getComments: (comments) => dispatch(getCommentsForPost(comments)),
-    dude: (id) => dispatch(handleGettingComments(id))
+    loadComments: (id) => dispatch(handleGettingComments(id)),
+    voteComment: (id, option) => dispatch(handleVoteComment(id, option))
   }
 }
 
