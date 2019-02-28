@@ -2,6 +2,7 @@ import {
   GET_ALL_POSTS, VOTE_POST,
   EDIT_POST, ADD_POST, DELETE_POST,
 } from '../actions/posts'
+import _ from 'lodash'
 
 export default function posts(state = {}, action) {
   switch (action.type) {
@@ -48,6 +49,15 @@ export default function posts(state = {}, action) {
         ...state,
         ...object
       }
+    case DELETE_POST : // in API will only set property to deleted, but in Redux, just remove out of store!
+      // delete state[action.id]
+      // return {
+      //   ...state,
+      //   [action.id]: null // deleting out of state
+      // }
+      const filteredKeys = Object.keys(state).filter(key => key !== action.id)
+      return _.pick(state, filteredKeys)
+      // return state.filter(post => )
     default :
       return state
   }

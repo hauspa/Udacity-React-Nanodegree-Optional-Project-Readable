@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
 import {
-  handleEditingPost, handleAddingPost,
+  handleEditingPost, handleAddingPost, handleDeletingPost,
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
 
@@ -80,6 +80,10 @@ class EditPost extends Component {
     }
   }
 
+  clickedDelete = () => {
+    this.props.deletePost(testID)
+  }
+
   log = () => {
     console.log('EDITED POST DUDE: ', this.props.post)
   }
@@ -136,22 +140,29 @@ class EditPost extends Component {
         </form>
         <br></br>
         <button onClick={this.log}>LOG EDITED POST</button>
+        <br></br>
+        <br></br>
+        {
+          inEditMode
+            ? <button onClick={this.clickedDelete}>Delete Post</button>
+            : null
+        }
       </div>
     )
   }
 }
 
 function mapStateToProps({ posts }) {
-  const filteredPosts = Object.values(posts).filter(post => post.id === testID)
-  console.log('POSTSS: ', posts)
-  const hello = Object.values(posts).includes(testID)
+  // const filteredPosts = Object.values(posts).filter(post => post.id === testID)
+  // console.log('POSTSS: ', posts)
+  // const hello = Object.values(posts).includes(testID)
 
   return {
     // isLoading: filteredPosts.length < 1,
     // post: filteredPosts[0],
     // TODO: get from URL param whether /posts/add or /posts/:id/edit
     // inEditMode: filteredPosts.length > 0 ? true : false
-    inEditMode: false
+    inEditMode: true
   }
 }
 
@@ -160,6 +171,7 @@ function mapDispatchToProps(dispatch) {
     getPost: (id) => PostsAPI.getPost(id),
     editPost: (id, editedPost) => dispatch(handleEditingPost(id, editedPost)),
     addPost: (newPost) => dispatch(handleAddingPost(newPost)),
+    deletePost: (id) => dispatch(handleDeletingPost(id)),
   }
 }
 

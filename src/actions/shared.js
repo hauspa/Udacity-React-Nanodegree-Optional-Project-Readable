@@ -1,7 +1,7 @@
 // Redux actions
 import { getAllCategories } from './categories'
 import {
-  getAllPosts, votePost, editPost, addPost,
+  getAllPosts, votePost, editPost, addPost, deletePost,
 } from './posts'
 import {
   getCommentsForPost, voteComment,
@@ -61,5 +61,12 @@ export function handleAddingPost(newPost) {
   return (dispatch) => {
     return PostsAPI.addPost(newPost)
       .then((post) => dispatch(addPost(post))) // use the object returned by API, as it will have additional data
+  }
+}
+
+export function handleDeletingPost(id) {
+  return (dispatch) => {
+    return PostsAPI.deletePost(id)
+      .then(() => dispatch(deletePost(id)))
   }
 }
