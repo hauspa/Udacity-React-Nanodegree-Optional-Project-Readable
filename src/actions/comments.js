@@ -14,10 +14,10 @@ export function parentDeleted(id) {
   }
 }
 
-export function getCommentsForPost(id) {
+export function getCommentsForPost(comments) {
   return {
     type: GET_COMMENTS_FOR_POST,
-    id,
+    comments,
   }
 }
 

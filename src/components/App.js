@@ -103,6 +103,8 @@ class App extends Component {
               // <Home />
               // <PostsByCategory />
               // <EditPost />
+              // TODO: before going to a page with id, check whether exists, otherwise 404 page
+              // TODO: 404 page!
               <PostDetail />
             )
         }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
+import { getCommentsForPost } from '../actions/comments'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -22,10 +23,11 @@ class PostDetail extends Component {
       })))
 
     loadComments(testID)
-      .then((comments) => this.setState((prevState) => ({
-        ...prevState,
-        comments,
-      })))
+      // .then((comments) => this.setState((prevState) => ({
+      //   ...prevState,
+      //   comments,
+      // })))
+      .then((comments) => this.props.getComments(comments))
   }
 
   handlePostVote = (e) => {
@@ -54,7 +56,8 @@ class PostDetail extends Component {
   }
 
   render(){
-    const { post, comments } = this.state
+    const { post } = this.state
+    const { comments } = this.props
     return (
       <div>
         {
@@ -109,17 +112,26 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps() {
+function mapStateToProps({ posts, comments }) {
+  console.log('posts: ', Object.values(posts))
+  // console.log('comments: ', Object.values(comments))
+  console.log('comments: ', comments) // -> is still empty!
+  // TODO: need to get comments per post!! use API here!!
+  const post = Object.values(posts).filter(post => post.id === testID)[0]
+  // const comments = Object.values(comments).filter(comment => comment.parentId === testID)
+  console.log('post: ', post)
   return {
-
+    post,
+    comments,
   }
 }
 
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
   return {
     // use API to get post instead of mapStateToProps, because get comments count automatically!
     loadPost: (id) => PostsAPI.getPost(id),
-    loadComments: (id) => CommentsAPI.getCommentsForPost(id)
+    loadComments: (id) => CommentsAPI.getCommentsForPost(id),
+    getComments: (comments) => dispatch(getCommentsForPost(comments))
   }
 }
 
