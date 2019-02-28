@@ -28,7 +28,25 @@ class PostDetail extends Component {
       })))
   }
 
-  handleClick = (e) => {
+  handlePostVote = (e) => {
+    e.preventDefault()
+    const vote = e.target.name
+    console.log('Voted: ', vote)
+    // TODO: can only once once per session/post.
+    PostsAPI.votePost(testID, vote)
+      .then(() => this.setState((prevState) => ({ // since using API and not Redux, gotta update local state
+        ...prevState,
+        post: {
+          ...prevState.post,
+          voteScore: vote === 'upVote'
+                      ? prevState.post.voteScore + 1
+                      : prevState.post.voteScore - 1,
+        }
+      })))
+      // .then((post) => this.props.dispatch()) // if use Redux instead!
+  }
+
+  handleCommentVote = (e) => {
     e.preventDefault()
     const vote = e.target.name
     console.log('Voted: ', vote)
@@ -37,8 +55,6 @@ class PostDetail extends Component {
 
   render(){
     const { post, comments } = this.state
-    console.log('Post detail: ', post)
-    console.log('Comments: ', comments)
     return (
       <div>
         {
@@ -50,8 +66,8 @@ class PostDetail extends Component {
                 <h2>{post.title || 'Title'}</h2>
                 <h3>By {post.author || 'Author'} on {post.timestamp || 'Date'}, Category: {post.category || 'Category'}</h3>
                 {/* TODO: Icon for voting up/down */}
-                <button onClick={this.handleClick} name='upVote'>Vote Up</button>
-                <button onClick={this.handleClick} name='downVote'>Vote Down</button>
+                <button onClick={this.handlePostVote} name='upVote'>Vote Up</button>
+                <button onClick={this.handlePostVote} name='downVote'>Vote Down</button>
                 <p>Vote Score: {post.voteScore}</p>
 
                 <p>{post.body}</p>
@@ -74,7 +90,6 @@ class PostDetail extends Component {
                                <button onClick={this.handleClick} name='upVote'>Vote Up</button>
                                <button onClick={this.handleClick} name='downVote'>Vote Down</button>
                                <p>Vote Score: {comment.voteScore}</p>
-                               <br></br>
                                <br></br>
                             </div>
                           ))
