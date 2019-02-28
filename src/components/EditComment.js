@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CommentsAPI from '../utils/api/comments'
 import {
-  handleEditingComment, handleAddingComment,
+  handleEditingComment, handleAddingComment, handleDeletingComment
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
 
@@ -67,6 +67,11 @@ class EditComment extends Component {
     }
   }
 
+  clickedDelete = (e) => {
+    e.preventDefault()
+    this.props.deleteComment(commentID)
+  }
+
   render(){
     const { body, author } = this.state
     const { inEditMode } = this.props
@@ -97,6 +102,11 @@ class EditComment extends Component {
                   inEditMode ? 'Save changes' : 'Add Comment'
                 }
             </button>
+            {
+              inEditMode
+                ? <button onClick={this.clickedDelete}>Delete</button>
+                : null
+            }
           </div>
         </form>
       </div>
@@ -107,7 +117,8 @@ class EditComment extends Component {
 function mapStateToProps() {
   return {
     // TODO: determine whether edit or add mode via url param id
-    inEditMode: false
+    inEditMode: true,
+    // commentID
   }
 }
 
@@ -116,6 +127,7 @@ function mapDispatchToProps(dispatch) {
     loadComment: (id) => CommentsAPI.getComment(id),
     editComment: (id, comment) => dispatch(handleEditingComment(id, comment)),
     addComment: (comment) => dispatch(handleAddingComment(comment)),
+    deleteComment: (id) => dispatch(handleDeletingComment(id))
   }
 }
 

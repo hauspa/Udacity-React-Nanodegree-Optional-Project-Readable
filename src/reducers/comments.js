@@ -3,6 +3,7 @@ import {
   GET_COMMENT, EDIT_COMMENT, DELETE_COMMENT,
   VOTE_COMMENT, PARENT_DELETED,
 } from '../actions/comments'
+import _ from 'lodash'
 
 export default function comments(state = {}, action) {
   switch (action.type) {
@@ -50,6 +51,9 @@ export default function comments(state = {}, action) {
         ...state,
         ...object
       }
+    case DELETE_COMMENT : // in API will only set property to deleted, but in Redux, just remove out of store!
+      const filteredKeys = Object.keys(state).filter(key => key !== action.id)
+      return _.pick(state, filteredKeys)
     default :
       return state
   }

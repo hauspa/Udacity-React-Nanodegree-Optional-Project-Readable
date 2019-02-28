@@ -80,7 +80,8 @@ class EditPost extends Component {
     }
   }
 
-  clickedDelete = () => {
+  clickedDelete = (e) => {
+    e.preventDefault()
     this.props.deletePost(testID)
   }
 

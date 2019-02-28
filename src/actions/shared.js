@@ -84,3 +84,10 @@ export function handleAddingComment(comment) {
       .then((comment) => dispatch(addComment(comment)))
   }
 }
+
+export function handleDeletingComment(id) {
+  return (dispatch) => {
+    return CommentsAPI.deleteComment(id)
+      .then(() => dispatch(deleteComment(id)))
+  }
+}
