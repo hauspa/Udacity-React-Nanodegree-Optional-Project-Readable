@@ -29,7 +29,7 @@ export default function posts(state = {}, action) {
         }
       }
     case EDIT_POST :
-      const { author, title, body, category } = action
+      const { author, title, body, category } = action.post
       return {
         ...state,
         [action.id]: {
@@ -39,6 +39,14 @@ export default function posts(state = {}, action) {
           body,
           category,
         }
+      }
+    case ADD_POST :
+      let object = {
+        [action.id]: action.post
+      }
+      return {
+        ...state,
+        ...object
       }
     default :
       return state

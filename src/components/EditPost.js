@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
-import { handleEditingPost } from '../actions/shared'
+import {
+  handleEditingPost, handleAddingPost,
+} from '../actions/shared'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -34,7 +36,7 @@ class EditPost extends Component {
     if (inEditMode) {
       // if it's in edit mode, populate fields with the post data
       getPost(testID)
-      .then((post) => this.updateState(post))
+        .then((post) => this.updateState(post))
       // getPost('006')
       // .catch(() => console.log('No Post with this ID available -> Edit Mode.'))
     }
@@ -54,9 +56,9 @@ class EditPost extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const { title, author, body, category } = this.state
-    const { inEditMode, editPost } = this.props
+    const { inEditMode, editPost, addPost } = this.props
 
-    const newPost = {
+    let newPost = {
       author,
       title,
       body,
@@ -64,12 +66,16 @@ class EditPost extends Component {
     }
     console.log('Created/Edited Post: ', newPost)
 
-    // TODO: edit in API/Redux!
     if (inEditMode) {
       editPost(testID, newPost)
     }
-    else{
-      // createPost method
+    else{ // = createPost method
+      newPost = {
+        ...newPost,
+        id: '009',
+        timestamp: Date.now(),
+      }
+      addPost(newPost)
     }
   }
 
@@ -144,7 +150,7 @@ function mapStateToProps({ posts }) {
     // post: filteredPosts[0],
     // TODO: get from URL param whether /posts/add or /posts/:id/edit
     // inEditMode: filteredPosts.length > 0 ? true : false
-    inEditMode: true
+    inEditMode: false
   }
 }
 
@@ -152,6 +158,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getPost: (id) => PostsAPI.getPost(id),
     editPost: (id, editedPost) => dispatch(handleEditingPost(id, editedPost)),
+    addPost: (newPost) => dispatch(handleAddingPost(newPost)),
   }
 }
 

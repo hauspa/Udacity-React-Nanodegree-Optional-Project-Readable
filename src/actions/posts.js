@@ -11,15 +11,10 @@ export function getAllPosts(posts) {
   }
 }
 
-export function addPost(id, timestamp, title, body, author, category) {
+export function addPost(post) {
   return {
     type: ADD_POST,
-    id,
-    timestamp,
-    title,
-    body,
-    author,
-    category
+    post,
   }
 }
 
@@ -31,11 +26,11 @@ export function votePost(id, option) {
   }
 }
 
-export function editPost(id, editedPost) {
+export function editPost(id, post) {
   return {
     type: EDIT_POST,
     id,
-    editedPost,
+    post,
   }
 }
 
