@@ -31,12 +31,11 @@ export function votePost(id, option) {
   }
 }
 
-export function editPost(id, title, body) {
+export function editPost(id, editedPost) {
   return {
     type: EDIT_POST,
     id,
-    title,
-    body,
+    editedPost,
   }
 }
 

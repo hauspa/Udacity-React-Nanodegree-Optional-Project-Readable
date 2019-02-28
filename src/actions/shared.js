@@ -1,10 +1,10 @@
 // Redux actions
 import { getAllCategories } from './categories'
 import {
-  getAllPosts, votePost,
+  getAllPosts, votePost, editPost,
 } from './posts'
 import {
-  getCommentsForPost, voteComment
+  getCommentsForPost, voteComment,
 } from './comments'
 
 // API methods
@@ -39,7 +39,6 @@ export function handleGettingComments(id) {
 export function handleVotingPost(id, option) {
   return (dispatch) => {
     return PostsAPI.votePost(id, option)
-      // .then((post) => console.log('new Score: ', post.voteScore))
       .then(() => dispatch(votePost(id, option)))
   }
 }
@@ -49,4 +48,11 @@ export function handleVotingComment(id, option) {
     return CommentsAPI.voteComment(id, option)
       .then(() => dispatch(voteComment(id, option)))
   }
+}
+
+export function handleEditingPost(id, newPost) {
+  return (dispatch) => {
+    return PostsAPI.editPost(id, newPost)
+      .then(() => dispatch(editPost(id, newPost)))
+    }
 }

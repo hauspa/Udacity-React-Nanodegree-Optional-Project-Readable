@@ -44,17 +44,19 @@ export const votePost = (id, option) =>
     .then(data => data) // = object of the updated post
 
 
-export const editPost = (id, title, body) =>
-  fetch(`${url}/posts/${id}`, {
+export const editPost = (id, editedPost) => {
+  const { author, title, body, category } = editedPost
+  return fetch(`${url}/posts/${id}`, {
     method: 'PUT',
     headers: {
       ...headers,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     },
-    body: JSON.stringify({ title, body })
+    body: JSON.stringify({ author, title, body, category })
   }).then(res => res.json())
     .then(data => data) // = object of edited post
+}
 
 
 export const deletePost = (id) =>

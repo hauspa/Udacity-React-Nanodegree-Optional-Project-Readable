@@ -28,6 +28,18 @@ export default function posts(state = {}, action) {
                       : state[action.id].voteScore - 1,
         }
       }
+    case EDIT_POST :
+      const { author, title, body, category } = action
+      return {
+        ...state,
+        [action.id]: {
+          ...state[action.id],
+          author,
+          title,
+          body,
+          category,
+        }
+      }
     default :
       return state
   }

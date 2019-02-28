@@ -17,6 +17,8 @@ class PostDetail extends Component {
   componentDidMount = () => {
     const { loadPost, loadComments } = this.props
 
+
+    // TODO: maybe still use API with Redux??
     // loadPost(testID)
     //   .then((post) => this.setState((prevState) => ({
     //     ...prevState,
@@ -35,8 +37,6 @@ class PostDetail extends Component {
 
   handleCommentVote = (e, id, vote) => {
     e.preventDefault()
-    // const vote = e.target.name
-    // const commentID = e.target.name
     // TODO: can only once once per session/comment.
     this.props.voteComment(id, vote)
   }
