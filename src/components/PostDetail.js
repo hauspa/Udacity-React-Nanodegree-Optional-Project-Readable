@@ -10,7 +10,7 @@ import {
 } from '../actions/shared'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
-const commentID = "894tuq4ut84ut8v4t8wun89g"
+// const commentID = "894tuq4ut84ut8v4t8wun89g"
 
 class PostDetail extends Component {
 
@@ -33,11 +33,12 @@ class PostDetail extends Component {
       this.props.votePost(testID, vote)
   }
 
-  handleCommentVote = (e) => {
+  handleCommentVote = (e, id, vote) => {
     e.preventDefault()
-    const vote = e.target.name
+    // const vote = e.target.name
+    // const commentID = e.target.name
     // TODO: can only once once per session/comment.
-    this.props.voteComment(commentID, vote)
+    this.props.voteComment(id, vote)
   }
 
   render(){
@@ -74,8 +75,8 @@ class PostDetail extends Component {
                             <div key={comment.id}>
                                <div>Author: {comment.author}</div>
                                <div>Body: {comment.body}</div>
-                               <button onClick={this.handleCommentVote} name='upVote'>Vote Up</button>
-                               <button onClick={this.handleCommentVote} name='downVote'>Vote Down</button>
+                               <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')}>Vote Up</button>
+                               <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')}>Vote Down</button>
                                <p>Vote Score: {comment.voteScore}</p>
                                <br></br>
                             </div>
