@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import Home from './Home'
 import PostsByCategory from './PostsByCategory'
 import EditPost from './EditPost'
-import PostDetail from './PostDetail'
+import PostPage from './PostPage'
 
 import {
   handleInitialData,
@@ -102,10 +102,10 @@ class App extends Component {
             : (
               // <Home />
               // <PostsByCategory />
-              <EditPost />
+              // <EditPost />
               // TODO: before going to a page with id, check whether exists, otherwise 404 page
               // TODO: 404 page!
-              // <PostDetail />
+              <PostPage />
             )
         }
       </div>

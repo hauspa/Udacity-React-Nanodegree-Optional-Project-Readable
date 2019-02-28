@@ -50,14 +50,8 @@ export default function posts(state = {}, action) {
         ...object
       }
     case DELETE_POST : // in API will only set property to deleted, but in Redux, just remove out of store!
-      // delete state[action.id]
-      // return {
-      //   ...state,
-      //   [action.id]: null // deleting out of state
-      // }
       const filteredKeys = Object.keys(state).filter(key => key !== action.id)
       return _.pick(state, filteredKeys)
-      // return state.filter(post => )
     default :
       return state
   }

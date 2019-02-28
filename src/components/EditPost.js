@@ -153,16 +153,9 @@ class EditPost extends Component {
 }
 
 function mapStateToProps({ posts }) {
-  // const filteredPosts = Object.values(posts).filter(post => post.id === testID)
-  // console.log('POSTSS: ', posts)
-  // const hello = Object.values(posts).includes(testID)
-
   return {
-    // isLoading: filteredPosts.length < 1,
-    // post: filteredPosts[0],
     // TODO: get from URL param whether /posts/add or /posts/:id/edit
-    // inEditMode: filteredPosts.length > 0 ? true : false
-    inEditMode: true
+    inEditMode: false
   }
 }
 
