@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CommentsAPI from '../utils/api/comments'
 import {
-  handleEditingComment,
+  handleEditingComment, handleAddingComment,
 } from '../actions/shared'
+import uuidv1 from 'uuid/v1'
 
+const testID = "8xf0y6ziyjabvozdd253nd"
 const commentID = "894tuq4ut84ut8v4t8wun89g"
 
 class EditComment extends Component {
@@ -15,9 +17,13 @@ class EditComment extends Component {
   }
 
   componentDidMount = () => {
-    const { loadComment } = this.props
-    loadComment(commentID)
+    const { loadComment, inEditMode } = this.props
+
+    if (inEditMode) {
+      loadComment(commentID)
+      // loadComment('008')
       .then((comment) => this.updateState(comment))
+    }
   }
 
   updateState = (comment) => {
@@ -40,7 +46,7 @@ class EditComment extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const { body, author } = this.state
-    const { inEditMode, editComment, } = this.props
+    const { inEditMode, editComment, addComment } = this.props
 
     let newComment = {
       author,
@@ -48,30 +54,29 @@ class EditComment extends Component {
       timestamp: Date.now(),
     }
 
-    editComment(commentID, newComment)
-
-    // if (inEditMode) {
-    //   editPost(testID, newPost)
-    // }
-    // else{ // = createPost method
-    //   newPost = {
-    //     ...newPost,
-    //     id: uuidv1(),
-    //     timestamp: Date.now(),
-    //   }
-    //   addPost(newPost)
-    // }
+    if (inEditMode) {
+      editComment(commentID, newComment)
+    }
+    else{ // = createPost method
+      newComment = {
+        ...newComment,
+        id: uuidv1(),
+        parentId: testID,
+      }
+      addComment(newComment)
+    }
   }
 
   render(){
     const { body, author } = this.state
+    const { inEditMode } = this.props
     return (
       <div>
         <form>
           <div className="form-row">
             <div className="form-group col">
               <label htmlFor="comment">Comment</label>
-              <input type="text" className="form-control" id="comment" placeholder="Enter Comment" value={body} onChange={this.handleChange} />
+              <input type="text" className="form-control" id="body" placeholder="Enter Comment" value={body} onChange={this.handleChange} />
             </div>
           </div>
 
@@ -88,7 +93,9 @@ class EditComment extends Component {
               className="btn btn-primary btn-lg mx-auto"
               disabled={ body === '' || author === '' }
               onClick={this.handleClick}>
-                Save Changes
+                {
+                  inEditMode ? 'Save changes' : 'Add Comment'
+                }
             </button>
           </div>
         </form>
@@ -97,18 +104,18 @@ class EditComment extends Component {
   }
 }
 
-function mapStateToProps({ comments }) {
+function mapStateToProps() {
   return {
     // TODO: determine whether edit or add mode via url param id
-    // inEditMode: false
-    // comment:
+    inEditMode: false
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     loadComment: (id) => CommentsAPI.getComment(id),
-    editComment: (id, comment) => dispatch(handleEditingComment(id, comment))
+    editComment: (id, comment) => dispatch(handleEditingComment(id, comment)),
+    addComment: (comment) => dispatch(handleAddingComment(comment)),
   }
 }
 

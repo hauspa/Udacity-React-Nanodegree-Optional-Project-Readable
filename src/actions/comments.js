@@ -21,14 +21,10 @@ export function getCommentsForPost(comments) {
   }
 }
 
-export function addComment(id, timestamp, body, author, parentId) {
+export function addComment(comment) {
   return {
     type: ADD_COMMENT,
-    id,
-    timestamp,
-    body,
-    author,
-    parentId,
+    comment,
   }
 }
 

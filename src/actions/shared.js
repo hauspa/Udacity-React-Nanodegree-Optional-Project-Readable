@@ -4,7 +4,7 @@ import {
   getAllPosts, votePost, editPost, addPost, deletePost,
 } from './posts'
 import {
-  getCommentsForPost, voteComment, editComment, addComment,
+  getCommentsForPost, voteComment, editComment, addComment, deleteComment,
 } from './comments'
 
 // API methods
@@ -75,5 +75,12 @@ export function handleEditingComment(id, comment) {
   return (dispatch) => {
     return CommentsAPI.editComment(id, comment)
       .then(() => dispatch(editComment(id, comment)))
+  }
+}
+
+export function handleAddingComment(comment) {
+  return (dispatch) => {
+    return CommentsAPI.addComment(comment)
+      .then((comment) => dispatch(addComment(comment)))
   }
 }

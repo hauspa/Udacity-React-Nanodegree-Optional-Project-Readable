@@ -42,6 +42,14 @@ export default function comments(state = {}, action) {
           timestamp,
         }
       }
+    case ADD_COMMENT :
+      let object = {
+        [action.comment.id]: action.comment
+      }
+      return {
+        ...state,
+        ...object
+      }
     default :
       return state
   }
