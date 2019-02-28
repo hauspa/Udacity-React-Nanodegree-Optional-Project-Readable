@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
 import { getCommentsForPost } from '../actions/comments'
+import { handleGettingComments } from '../actions/shared'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -22,12 +23,13 @@ class PostDetail extends Component {
         post
       })))
 
-    loadComments(testID)
-      // .then((comments) => this.setState((prevState) => ({
-      //   ...prevState,
-      //   comments,
-      // })))
-      .then((comments) => this.props.getComments(comments))
+    // loadComments(testID)
+    //   // .then((comments) => this.setState((prevState) => ({
+    //   //   ...prevState,
+    //   //   comments,
+    //   // })))
+    //   .then((comments) => this.props.getComments(comments))
+    this.props.dude(testID)
   }
 
   handlePostVote = (e) => {
@@ -130,8 +132,9 @@ function mapDispatchToProps(dispatch) {
   return {
     // use API to get post instead of mapStateToProps, because get comments count automatically!
     loadPost: (id) => PostsAPI.getPost(id),
-    loadComments: (id) => CommentsAPI.getCommentsForPost(id),
-    getComments: (comments) => dispatch(getCommentsForPost(comments))
+    //loadComments: (id) => CommentsAPI.getCommentsForPost(id),
+    //getComments: (comments) => dispatch(getCommentsForPost(comments)),
+    dude: (id) => dispatch(handleGettingComments(id))
   }
 }
 
