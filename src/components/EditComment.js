@@ -7,8 +7,8 @@ import {
 import uuidv1 from 'uuid/v1'
 import PropTypes from 'prop-types'
 
-const testID = "8xf0y6ziyjabvozdd253nd"
-const commentID = "894tuq4ut84ut8v4t8wun89g"
+// const testID = "8xf0y6ziyjabvozdd253nd"
+// const commentID = "894tuq4ut84ut8v4t8wun89g"
 
 class EditComment extends Component {
 
@@ -18,10 +18,10 @@ class EditComment extends Component {
   }
 
   componentDidMount = () => {
-    const { loadComment, inEditMode } = this.props
+    const { loadComment, inEditMode, id } = this.props
 
     if (inEditMode) {
-      loadComment(commentID)
+      loadComment(id)
       // loadComment('008')
       .then((comment) => this.updateState(comment))
     }
@@ -47,7 +47,10 @@ class EditComment extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const { body, author } = this.state
-    const { inEditMode, editComment, addComment, onClickingEdit } = this.props
+    const {
+      inEditMode, editComment, addComment,
+      onClickingEdit, id, parent,
+    } = this.props
 
     let newComment = {
       author,
@@ -56,14 +59,14 @@ class EditComment extends Component {
     }
 
     if (inEditMode) {
-      editComment(commentID, newComment)
+      editComment(id, newComment)
         .then(() => onClickingEdit()) // go back to only displaying the comment
     }
     else{ // = createPost method
       newComment = {
         ...newComment,
         id: uuidv1(),
-        parentId: testID,
+        parentId: parent,
       }
       addComment(newComment)
         .then(() => onClickingEdit()) // go back to only displaying the comment
@@ -71,8 +74,9 @@ class EditComment extends Component {
   }
 
   clickedDelete = (e) => {
+    const { id } = this.props
     e.preventDefault()
-    this.props.deleteComment(commentID)
+    this.props.deleteComment(id)
   }
 
   render(){
@@ -118,7 +122,8 @@ class EditComment extends Component {
 }
 
 EditComment.propTypes = {
-  // comment: PropTypes.object.isRequired,
+  id: PropTypes.string,
+  parent: PropTypes.string,
   onClickingEdit: PropTypes.func.isRequired,
 }
 

@@ -38,11 +38,7 @@ class Comments extends Component {
                 }
                 <br></br>
 
-                <button onClick={this.showNewComment}>Add Comment</button>
-
-                <br></br>
-
-                {/* <EditComment /> */}
+                <button onClick={this.showNewComment}>Add Comment</button>                
 
                 <br></br>
               </div>

@@ -24,8 +24,8 @@ class CommentSwitch extends Component {
       <div>
         {
           isDisplayMode
-            ? <Comment comment={comment} onClickingEdit={this.changeMode} key={comment.id} />
-            : <EditComment onClickingEdit={this.changeMode} />
+            ? <Comment comment={comment} onClickingEdit={this.changeMode} />
+            : <EditComment onClickingEdit={this.changeMode} id={comment.id} parent={comment.parentId} />
         }
       </div>
     )
