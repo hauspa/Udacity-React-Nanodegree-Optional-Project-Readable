@@ -84,7 +84,7 @@ class EditPost extends Component {
   }
 
   render(){
-    const { inEditMode, id } = this.props
+    const { inEditMode, id, categories } = this.props
     const { title, author, body, category } = this.state
     const pageText = inEditMode ? 'Save changes' : 'Add Post'
 
@@ -109,15 +109,26 @@ class EditPost extends Component {
           <br></br>
 
           <div className="form-group">
-            <label htmlFor="body">Body</label>
-            <input type="text" className="form-control" id="body" placeholder="Body" value={body} onChange={this.handleChange} />
+            <label htmlFor="body">Post</label>
+            <textarea rows="3" className="form-control" id="body" placeholder="Write your post..." value={body} onChange={this.handleChange} />
           </div>
 
           <br></br>
 
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="category">Category</label>
             <input type="text" className="form-control" id="category" placeholder="Category" value={category} onChange={this.handleChange} />
+          </div> */}
+
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <select className="form-control" id="category">
+              {
+                categories.map(category => (
+                  <option key={category.path}>{category.name}</option>
+                ))
+              }
+            </select>
           </div>
 
           <br></br>
@@ -149,11 +160,12 @@ class EditPost extends Component {
   }
 }
 
-function mapStateToProps({ posts }, { match }) {
+function mapStateToProps({ posts, categories }, { match }) {
   console.log('MATCH edit: ', match)
   return {
     inEditMode: match.path.includes('edit'), // get from URL param whether /posts/add or /posts/:id/edit
     id: match.params.id,
+    categories,
   }
 }
 

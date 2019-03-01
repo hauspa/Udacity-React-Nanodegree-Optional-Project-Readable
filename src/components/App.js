@@ -6,6 +6,9 @@ import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 
+// Styling
+import 'bootstrap/dist/css/bootstrap.css'
+
 // Components
 import Home from './Home'
 import PostsByCategory from './PostsByCategory'
@@ -126,10 +129,6 @@ class App extends Component {
 // TODO: add comments in mapStateToProps as well? in case directly access post page?
 function mapStateToProps({ categories, posts }, { location }) {
   // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
-  console.log('Location: ', location.pathname)
-  console.log('Substring: ', location.pathname.substring(prefixForPosts.length))
-  console.log('PostKeys: ', Object.keys(posts))
-  console.log('Includes? ', Object.keys(posts).includes(location.pathname.substring(prefixForPosts.length)))
   return {
     isLoading: categories.length < 1 || posts.length < 1,
     postKeys: Object.keys(posts),
