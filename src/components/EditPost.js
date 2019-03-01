@@ -5,6 +5,7 @@ import {
   handleEditingPost, handleAddingPost, handleDeletingPost,
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
+import { Link } from 'react-router-dom'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -27,19 +28,16 @@ class EditPost extends Component {
   }
 
   componentDidMount = () => {
-    const { getPost, inEditMode } = this.props
+    const { getPost, inEditMode, id } = this.props
 
-    // TODO: get param id from Router, to see whether edit or add mode.
     // TODO: then when it's edit mode, fire the API method with .then to update the state to fill in the form!
     // TODO: make sure there is no bug/error in console when using API, when the ID doesn't exist!
     // TODO: if possible, instead of using API, use Redux store
 
     if (inEditMode) {
       // if it's in edit mode, populate fields with the post data
-      getPost(testID)
+      getPost(id)
         .then((post) => this.updateState(post))
-      // getPost('006')
-      // .catch(() => console.log('No Post with this ID available -> Edit Mode.'))
     }
   }
 
@@ -57,7 +55,7 @@ class EditPost extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const { title, author, body, category } = this.state
-    const { inEditMode, editPost, addPost } = this.props
+    const { inEditMode, editPost, addPost, id } = this.props
 
     let newPost = {
       author,
@@ -65,10 +63,9 @@ class EditPost extends Component {
       body,
       category,
     }
-    console.log('Created/Edited Post: ', newPost)
 
     if (inEditMode) {
-      editPost(testID, newPost)
+      editPost(id, newPost)
     }
     else{ // = createPost method
       newPost = {
@@ -81,18 +78,15 @@ class EditPost extends Component {
   }
 
   clickedDelete = (e) => {
+    const { deletePost, id } = this.props
     e.preventDefault()
-    this.props.deletePost(testID)
-  }
-
-  log = () => {
-    console.log('EDITED POST DUDE: ', this.props.post)
+    deletePost(id)
   }
 
   render(){
-    const { inEditMode } = this.props
+    const { inEditMode, id } = this.props
     const { title, author, body, category } = this.state
-    const pageText = inEditMode ? 'Edit Post' : 'Add Post'
+    const pageText = inEditMode ? 'Save changes' : 'Add Post'
 
     return (
       <div>
@@ -137,11 +131,13 @@ class EditPost extends Component {
               onClick={this.handleClick}>
                 {pageText}
             </button>
+            {
+              inEditMode
+                ? <Link to={`/posts/post/${id}`}><button>Cancel</button></Link>
+                : <Link to='/'><button>Cancel</button></Link>
+            }
           </div>
         </form>
-        <br></br>
-        <button onClick={this.log}>LOG EDITED POST</button>
-        <br></br>
         <br></br>
         {
           inEditMode
@@ -153,10 +149,11 @@ class EditPost extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
+function mapStateToProps({ posts }, { match }) {
+  console.log('MATCH edit: ', match)
   return {
-    // TODO: get from URL param whether /posts/add or /posts/:id/edit
-    inEditMode: false
+    inEditMode: match.path.includes('edit'), // get from URL param whether /posts/add or /posts/:id/edit
+    id: match.params.id,
   }
 }
 

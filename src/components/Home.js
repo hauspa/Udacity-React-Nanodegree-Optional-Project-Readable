@@ -18,6 +18,10 @@ class Home extends Component {
         </div>
         <br></br>
         <p>Posts</p>
+        {/* TODO: add plus icon  */}
+        <Link to='/posts/add'><button>Add New Post</button></Link>
+        <br></br>
+        <br></br>
         <div>
           {
             Object.values(posts).map(post => (

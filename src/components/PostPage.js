@@ -6,6 +6,7 @@ import {
 } from '../actions/shared'
 import Comments from './Comments'
 import * as moment from 'moment'
+import { Link } from 'react-router-dom'
 
 class PostPage extends Component {
 
@@ -47,7 +48,7 @@ class PostPage extends Component {
 
                 <p>{post.body}</p>
 
-                <button>Edit this Post</button>
+                <Link to={`/posts/post/${id}/edit`}><button>Edit this Post</button></Link>
                 <br></br>
                 <br></br>
 

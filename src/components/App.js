@@ -11,6 +11,7 @@ import Home from './Home'
 import PostsByCategory from './PostsByCategory'
 import EditPost from './EditPost'
 import PostPage from './PostPage'
+import ErrorPage from './ErrorPage'
 
 import {
   handleInitialData,
@@ -106,14 +107,14 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route path='/posts/category/:category' component={PostsByCategory} />
-                <Route path='/dude' component={EditPost} />
-                {/* TODO: before going to a page with id, check whether exists, otherwise 404 page */}
+                <Route path={`${prefixForPosts}:id/edit`} component={EditPost} />
+                <Route path={`/posts/add`} component={EditPost} />
                 {
+                  // before going to a page with id, check whether exists
                   postKeys.includes(postID) &&
                     <Route path={`${prefixForPosts}:id`} component={PostPage} />
                 }
-                {/* TODO: 404 page! */}
-                {/* <Route component={ErrorPage} /> */}
+                <Route component={ErrorPage} />
               </Switch>
             )
         }
