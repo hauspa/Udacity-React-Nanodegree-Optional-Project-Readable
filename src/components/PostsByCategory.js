@@ -10,9 +10,9 @@ class PostsByCategory extends Component {
   }
 
   componentDidMount = () => {
-    const { getPosts } = this.props
+    const { getPosts, category } = this.props
 
-    getPosts('react')
+    getPosts(category)
       .then((filteredPosts) => this.setState({ posts: filteredPosts, isLoaded: true }))
   }
 
@@ -40,8 +40,12 @@ class PostsByCategory extends Component {
   }
 }
 
-// can't load posts from mapStateToProps, since could be that user access app directly on the category page and thus posts state is still empty!!
-function mapStateToProps() {return {}}
+
+function mapStateToProps(state, { match }) {
+  return {
+    category: match.params.category,
+  }
+}
 
 function mapDispatchToProps(dispatch) {
   return {

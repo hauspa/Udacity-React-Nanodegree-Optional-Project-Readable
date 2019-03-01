@@ -12,7 +12,7 @@ class Home extends Component {
         <div>
           {
             categories.map(category => (
-              <div key={category.path}>{category.name}</div>
+              <Link to={`/posts/category/${category.name}`} key={category.path}><div>{category.name}</div></Link>
             ))
           }
         </div>

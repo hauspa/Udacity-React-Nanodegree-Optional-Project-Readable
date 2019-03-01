@@ -105,7 +105,7 @@ class App extends Component {
             : (
               <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/test' component={PostsByCategory} />
+                <Route path='/posts/category/:category' component={PostsByCategory} />
                 <Route path='/dude' component={EditPost} />
                 {/* TODO: before going to a page with id, check whether exists, otherwise 404 page */}
                 {
