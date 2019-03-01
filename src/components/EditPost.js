@@ -122,10 +122,10 @@ class EditPost extends Component {
 
           <div className="form-group">
             <label htmlFor="category">Category</label>
-            <select className="form-control" id="category">
+            <select value={category} onChange={this.handleChange} className="form-control" id="category">
               {
                 categories.map(category => (
-                  <option key={category.path}>{category.name}</option>
+                  <option key={category.path} value={category.name} >{category.name}</option>
                 ))
               }
             </select>
