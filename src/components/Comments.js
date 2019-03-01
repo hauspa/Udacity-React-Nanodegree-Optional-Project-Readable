@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleGettingComments } from '../actions/shared'
 import CommentSwitch from './CommentSwitch'
+import EditComment from './EditComment'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -9,8 +10,7 @@ const testID = "8xf0y6ziyjabvozdd253nd"
 class Comments extends Component {
 
   state = {
-    // showNewComment,
-    isDisplayMode: true,
+    isAddMode: false,
   }
 
   componentDidMount = () => {
@@ -18,12 +18,15 @@ class Comments extends Component {
     loadComments(testID)
   }
 
-  showNewComment = () => {
-
+  showNewCommentInput = () => {
+    this.setState((prevState) => ({
+      isAddMode: !prevState.isAddMode
+    }))
   }
 
   render(){
     const { comments } = this.props
+    const { isAddMode } = this.state
     return (
       <div>
         {
@@ -38,7 +41,11 @@ class Comments extends Component {
                 }
                 <br></br>
 
-                <button onClick={this.showNewComment}>Add Comment</button>                
+                {
+                  isAddMode
+                    ? <EditComment  />
+                    : <button onClick={this.showNewCommentInput}>Add Comment</button>
+                }
 
                 <br></br>
               </div>

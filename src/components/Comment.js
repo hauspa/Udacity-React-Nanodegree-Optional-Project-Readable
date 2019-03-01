@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { handleVotingComment } from '../actions/shared'
+import * as moment from 'moment'
 
 class Comment extends Component {
 
@@ -17,6 +18,7 @@ class Comment extends Component {
       <div>
          <div>Author: {comment.author}</div>
          <div>Body: {comment.body}</div>
+         <div>commented on {moment(comment.timestamp).format('MMM Do YYYY')}</div>
          <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')}>Vote Up</button>
          <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')}>Vote Down</button>
          <div>Vote Score: {comment.voteScore}</div>
