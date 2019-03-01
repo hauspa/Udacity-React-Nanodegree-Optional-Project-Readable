@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { handleGettingComments } from '../actions/shared'
 import CommentSwitch from './CommentSwitch'
 import EditComment from './EditComment'
+import PropTypes from 'prop-types'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -14,8 +15,8 @@ class Comments extends Component {
   }
 
   componentDidMount = () => {
-    const { loadComments } = this.props
-    loadComments(testID)
+    const { loadComments, id } = this.props
+    loadComments(id)
   }
 
   showNewCommentInput = () => {
@@ -54,6 +55,10 @@ class Comments extends Component {
       </div>
     )
   }
+}
+
+Comments.propTypes = {
+  id: PropTypes.string.isRequired,
 }
 
 function mapStateToProps({ comments }) {

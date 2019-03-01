@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 class Home extends Component {
-
-  log = () => {
-    const { posts } = this.props
-    console.log('LOG: ', Object.values(posts))
-
-  }
 
   render() {
     let { categories, posts } = this.props
@@ -26,11 +21,10 @@ class Home extends Component {
         <div>
           {
             Object.values(posts).map(post => (
-              <div key={post.id}>{post.title}</div>
+              <Link to={`/posts/post/${post.id}`} key={post.id}><div>{post.title}</div></Link>
             ))
           }
         </div>
-        <button onClick={this.log}>Log Categories</button>
       </div>
     )
   }

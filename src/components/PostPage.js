@@ -7,8 +7,6 @@ import {
 import Comments from './Comments'
 import * as moment from 'moment'
 
-const testID = "8xf0y6ziyjabvozdd253nd"
-
 class PostPage extends Component {
 
   componentDidMount = () => {
@@ -23,14 +21,15 @@ class PostPage extends Component {
   }
 
   handlePostVote = (e) => {
+    const { votePost, id } = this.props
     e.preventDefault()
     const vote = e.target.name
     // TODO: can only once once per session/post.
-      this.props.votePost(testID, vote)
+    votePost(id, vote)
   }
 
   render(){
-    const { comments, post } = this.props
+    const { comments, post, id } = this.props
     return (
       <div>
         {
@@ -53,7 +52,7 @@ class PostPage extends Component {
                 <br></br>
 
                 <h3>{post.commentCount} comments</h3>
-                <Comments />
+                <Comments id={id} />
               </div>
             )
         }
@@ -62,11 +61,13 @@ class PostPage extends Component {
   }
 }
 
-function mapStateToProps({ posts }) {
-  const post = Object.values(posts).filter(post => post.id === testID)[0]
+function mapStateToProps({ posts }, { match }) {
+  const id = match.params.id
+  const post = Object.values(posts).filter(post => post.id === id)[0] // grab first object, since filter() returns an array
   console.log('post: ', post)
   return {
     post, // TODO: Could use both API & Redux together!!!
+    id,
   }
 }
 

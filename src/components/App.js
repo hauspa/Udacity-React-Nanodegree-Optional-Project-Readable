@@ -17,7 +17,7 @@ import {
 } from '../actions/shared'
 
 // save as property, so that when changing URL anytime, there's no problem!
-const prefixForPosts = '/posts/'
+const prefixForPosts = '/posts/post/'
 
 class App extends Component {
 
@@ -110,7 +110,7 @@ class App extends Component {
                 {/* TODO: before going to a page with id, check whether exists, otherwise 404 page */}
                 {
                   postKeys.includes(postID) &&
-                    <Route path={`${prefixForPosts}/${postID}`} component={PostPage} />
+                    <Route path={`${prefixForPosts}:id`} component={PostPage} />
                 }
                 {/* TODO: 404 page! */}
                 {/* <Route component={ErrorPage} /> */}
@@ -122,10 +122,13 @@ class App extends Component {
   }
 }
 
-
 // TODO: add comments in mapStateToProps as well? in case directly access post page?
 function mapStateToProps({ categories, posts }, { location }) {
   // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
+  console.log('Location: ', location.pathname)
+  console.log('Substring: ', location.pathname.substring(prefixForPosts.length))
+  console.log('PostKeys: ', Object.keys(posts))
+  console.log('Includes? ', Object.keys(posts).includes(location.pathname.substring(prefixForPosts.length)))
   return {
     isLoading: categories.length < 1 || posts.length < 1,
     postKeys: Object.keys(posts),
