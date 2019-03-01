@@ -4,6 +4,7 @@ import { getCategories as CategoriesAPI }  from '../utils/api/categories'
 import * as PostsAPI from '../utils/api/posts'
 import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 // Components
 import Home from './Home'
@@ -15,6 +16,8 @@ import {
   handleInitialData,
 } from '../actions/shared'
 
+// save as property, so that when changing URL anytime, there's no problem!
+const prefixForPosts = '/posts/'
 
 class App extends Component {
 
@@ -93,19 +96,25 @@ class App extends Component {
   }
 
   render() {
-    let { isLoading, categories, posts } = this.props
+    let { isLoading, postKeys, postID } = this.props
     return (
       <div>
         {
           isLoading
             ? null
             : (
-              // <Home />
-              // <PostsByCategory />
-              // <EditPost />
-              // TODO: before going to a page with id, check whether exists, otherwise 404 page
-              // TODO: 404 page!
-              <PostPage />
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route path='/test' component={PostsByCategory} />
+                <Route path='/dude' component={EditPost} />
+                {/* TODO: before going to a page with id, check whether exists, otherwise 404 page */}
+                {
+                  postKeys.includes(postID) &&
+                    <Route path={`${prefixForPosts}/${postID}`} component={PostPage} />
+                }
+                {/* TODO: 404 page! */}
+                {/* <Route component={ErrorPage} /> */}
+              </Switch>
             )
         }
       </div>
@@ -114,9 +123,13 @@ class App extends Component {
 }
 
 
-function mapStateToProps({ categories, posts }) {
+// TODO: add comments in mapStateToProps as well? in case directly access post page?
+function mapStateToProps({ categories, posts }, { location }) {
+  // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
   return {
     isLoading: categories.length < 1 || posts.length < 1,
+    postKeys: Object.keys(posts),
+    postID: location.pathname.substring(prefixForPosts.length)
   }
 }
 
@@ -126,4 +139,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
