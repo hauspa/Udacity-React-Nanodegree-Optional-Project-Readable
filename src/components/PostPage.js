@@ -5,6 +5,7 @@ import {
   handleVotingPost,
 } from '../actions/shared'
 import Comments from './Comments'
+import * as moment from 'moment'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -37,9 +38,9 @@ class PostPage extends Component {
             ? null
             : (
               <div>
-                <h1>Post Detail</h1>
+                <h1>Post Page</h1>
                 <h2>{post.title || 'Title'}</h2>
-                <h3>By {post.author || 'Author'} on {post.timestamp || 'Date'}, Category: {post.category || 'Category'}</h3>
+                <h3>By {post.author || 'Author'} on {moment(post.timestamp).format('MMM Do YYYY') || 'Date'}, Category: {post.category || 'Category'}</h3>
                 {/* TODO: Icon for voting up/down */}
                 <button onClick={this.handlePostVote} name='upVote'>Vote Up</button>
                 <button onClick={this.handlePostVote} name='downVote'>Vote Down</button>

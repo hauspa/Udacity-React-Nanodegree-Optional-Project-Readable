@@ -5,6 +5,7 @@ import {
   handleEditingComment, handleAddingComment, handleDeletingComment
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
+import PropTypes from 'prop-types'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 const commentID = "894tuq4ut84ut8v4t8wun89g"
@@ -46,7 +47,7 @@ class EditComment extends Component {
   handleClick = (e) => {
     e.preventDefault()
     const { body, author } = this.state
-    const { inEditMode, editComment, addComment } = this.props
+    const { inEditMode, editComment, addComment, onClickingEdit } = this.props
 
     let newComment = {
       author,
@@ -56,6 +57,7 @@ class EditComment extends Component {
 
     if (inEditMode) {
       editComment(commentID, newComment)
+        .then(() => onClickingEdit()) // go back to only displaying the comment
     }
     else{ // = createPost method
       newComment = {
@@ -64,6 +66,7 @@ class EditComment extends Component {
         parentId: testID,
       }
       addComment(newComment)
+        .then(() => onClickingEdit()) // go back to only displaying the comment
     }
   }
 
@@ -112,6 +115,11 @@ class EditComment extends Component {
       </div>
     )
   }
+}
+
+EditComment.propTypes = {
+  // comment: PropTypes.object.isRequired,
+  onClickingEdit: PropTypes.func.isRequired,
 }
 
 function mapStateToProps() {

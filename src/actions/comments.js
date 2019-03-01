@@ -1,4 +1,3 @@
-export const PARENT_DELETED = 'PARENT_DELETED'
 export const GET_COMMENTS_FOR_POST = 'GET_COMMENTS_FOR_POST'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const GET_COMMENT = 'GET_COMMENT'
@@ -6,13 +5,6 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 export const EDIT_COMMENT = 'EDIT_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
-
-export function parentDeleted(id) {
-  return {
-    type: PARENT_DELETED,
-    id,
-  }
-}
 
 export function getCommentsForPost(comments) {
   return {
