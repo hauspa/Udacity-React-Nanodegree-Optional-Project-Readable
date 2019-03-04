@@ -2,31 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import _ from 'lodash/string'
 
 class Categories extends Component {
 
-  state = {
-    activeCategory: '',
-  }
 
-  setCategory = (e) => {
-    const category = e.target.name
-    this.setState(() => ({
-      activeCategory: category
-    }))
-    console.log('Category: ', category)
-  }
 
   render(){
-    const { categories } = this.props
+    const { categories, activeCategory, onClickingCategory } = this.props
+    console.log('Active Category DUDE: ', activeCategory)
     return(
       <div className='row justify-content-center'>
-        <ul className="nav nav-pills nav-fill m">
+        <ul className="nav nav-pills nav-fill">
           {
             categories.map(category => (
-              <li key={category.path} name='WTF' className="nav-item" onClick={this.setCategory}>
-                <Link to={`/posts/category/${category.name}`} className="nav-link active">
-                  <div>{category.name}</div>
+              <li key={category.path}
+                className="nav-item px-4"
+                onClick={(e)=> onClickingCategory(e, category.name)}
+              >
+                {/* <Link to={`/posts/category/${category.name}`} className={"nav-link " + activeCategory === category.name ? "active" : ""}> */}
+                <Link to='' className={"nav-link " + (activeCategory === category.name ? "active" : "")}>
+                  {_.capitalize(category.name)}
+                  {/* <div>{_.capitalize(category.name)}</div> */}
                 </Link>
               </li>
             ))
@@ -38,7 +35,7 @@ class Categories extends Component {
 }
 
 Categories.propTypes = {
-
+  onClickingCategory: PropTypes.func.isRequired,
 }
 
 function mapStateToProps({ categories }) {

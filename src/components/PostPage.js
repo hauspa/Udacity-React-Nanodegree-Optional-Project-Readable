@@ -38,7 +38,6 @@ class PostPage extends Component {
             ? null
             : (
               <div className='postPage'>
-                <h1 className='text-center'>Post</h1>
                 <div className='bg-success'>
                   <div className='title'>{post.title || 'Title'}</div>
                   <div className='category'>{post.category || 'Category'}</div>

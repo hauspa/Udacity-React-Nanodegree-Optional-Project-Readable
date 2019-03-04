@@ -8,19 +8,34 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 class Home extends Component {
 
   state = {
-    sortByVote: true
+    sortByVote: true,
+    activeCategory: '',
+  }
+
+  setCategory = (e, category) => {
+    console.log('Setting active category: ', category)
+    this.setState((prevState) => ({
+      ...prevState,
+      // if category is already active, then set to null again!
+      activeCategory: prevState.activeCategory === category ? '' : category
+    }))
   }
 
   changeSorting = (byVote) => {
     this.setState((prevState) => ({
+      ...prevState,
       sortByVote: byVote
     }))
   }
 
   sortPosts = () => {
     const { posts } = this.props
-    const { sortByVote } = this.state
-    const postsArray = Object.values(posts)
+    const { sortByVote, activeCategory } = this.state
+    let postsArray = Object.values(posts)
+    if (activeCategory !== '') {
+      // show only posts for active category
+      postsArray = postsArray.filter(post => post.category === activeCategory) 
+    }
     // sort by votescore or date
     return sortByVote
       ? postsArray.sort((a,b) => b.voteScore - a.voteScore)
@@ -29,12 +44,12 @@ class Home extends Component {
 
   render() {
     const { categories } = this.props
-    const { sortByVote } = this.state
+    const { sortByVote, activeCategory } = this.state
     return (
       <div>
         <br></br>
-        <h1 className='text-center'>Posts</h1>
-        <Categories />
+        <h1 className='text-center'>Readable</h1>
+        <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} />
 
         <div className='row dude justify-content-center align-items-center'>
           <nav>
@@ -67,7 +82,6 @@ class Home extends Component {
 
 // TODO: load comments here too, for isLoading?
 function mapStateToProps({ categories, posts }) {
-
   return {
     posts,
     isLoading: categories.length < 1 || posts.length < 1,

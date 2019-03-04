@@ -18,7 +18,7 @@ class Comment extends Component {
     return (
       <div className='comment w-100 my-3'>
         <div className=''>
-          <div className='bg-success'>
+          <div className=' bg-success'>
             {comment.author} commented on {moment(comment.timestamp).format('MMM Do YYYY')}
           </div>
           <div className='voting'>
