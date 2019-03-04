@@ -1,3 +1,8 @@
+.categories {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 .post {
   color: white;
   width: 600px;
@@ -9,10 +14,21 @@
 .post .voting {
   max-width: 40px;
   background-color: orange;
-  font-size: 30px;
+  font-size: 20px;
 }
 .post .title {
   font-size: 30px;
+}
+.dude {
+  background-color: coral;
+}
+
+.wtf {
+  background-color: turquoise;
+}
+
+.bg-yellow {
+  background-color: yellow;
 }
 
 /*# sourceMappingURL=style.css.map */

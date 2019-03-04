@@ -20,17 +20,19 @@ class Categories extends Component {
   render(){
     const { categories } = this.props
     return(
-      <ul className="nav nav-pills nav-fill">
-        {
-          categories.map(category => (
-            <li key={category.path} name='WTF' className="nav-item" onClick={this.setCategory}>
-              <Link name='dude' to={`/posts/category/${category.name}`} className="nav-link active">
-                <div>{category.name}</div>
-              </Link>
-            </li>
-          ))
-        }
-      </ul>
+      <div className='row justify-content-center'>
+        <ul className="nav nav-pills nav-fill m">
+          {
+            categories.map(category => (
+              <li key={category.path} name='WTF' className="nav-item" onClick={this.setCategory}>
+                <Link to={`/posts/category/${category.name}`} className="nav-link active">
+                  <div>{category.name}</div>
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     )
   }
 }

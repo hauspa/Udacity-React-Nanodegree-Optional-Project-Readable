@@ -23,13 +23,13 @@ class Post extends Component {
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>
-              <div>Vote Score: {post.voteScore}</div>
             </Link>
           </div>
           <div className='col voting'>
             <div className='row flex-column'>
-              <button onClick={(e) => this.handlePostVote(e, 'upVote')}><FiChevronUp /></button>
-              <button onClick={(e) => this.handlePostVote(e, 'downVote')}><FiChevronDown /></button>
+              <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn'><FiChevronUp /></button>
+              <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn'><FiChevronDown /></button>
+              <div>{post.voteScore}</div>
             </div>
           </div>
         </div>

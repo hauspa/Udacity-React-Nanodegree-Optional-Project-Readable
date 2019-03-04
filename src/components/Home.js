@@ -3,25 +3,54 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Categories from './Categories'
 import Post from './Post'
+import { IoIosAddCircleOutline } from 'react-icons/io'
 
 class Home extends Component {
 
+  state = {
+    sortByVote: true
+  }
+
+  changeSorting = (byVote) => {
+    this.setState((prevState) => ({
+      sortByVote: byVote
+    }))
+  }
+
   sortPosts = () => {
     const { posts } = this.props
-    // TODO: sort by date & voteScore
-    return Object.values(posts).sort((a,b) => b.voteScore - a.voteScore)
+    const { sortByVote } = this.state
+    const postsArray = Object.values(posts)
+    // sort by votescore or date
+    return sortByVote
+      ? postsArray.sort((a,b) => b.voteScore - a.voteScore)
+      : postsArray.sort((a,b) => b.timestamp - a.timestamp)
   }
 
   render() {
-    let { categories } = this.props
+    const { categories } = this.props
+    const { sortByVote } = this.state
     return (
       <div>
         <br></br>
         <h1 className='text-center'>Posts</h1>
         <Categories />
 
+        <div className='row dude justify-content-center align-items-center'>
+          <nav>
+            <ul className="pagination justify-content-center">
+              <li className={"page-item " + (sortByVote ? 'active' : '')} onClick={() => this.changeSorting(true)}><button className="page-link">Vote Score</button></li>
+              <li className={"page-item " + (sortByVote ? '' : 'active')} onClick={() => this.changeSorting(false)}><button className="page-link">Date</button></li>
+            </ul>
+          </nav>
+        </div>
 
-
+        <div className='row wtf justify-content-center'>
+          <div className='flex-column'>
+            <Link to='/posts/add' className='bg-warning d-flex justify-content-center'><IoIosAddCircleOutline /></Link>
+            <div className='bg-danger'>Add new post</div>
+          </div>
+        </div>
 
 
         <div className='row flex-column bg-warning align-items-center'>
@@ -31,8 +60,6 @@ class Home extends Component {
             ))
           }
         </div>
-        {/* TODO: add plus icon  */}
-        <Link to='/posts/add'><button>Add New Post</button></Link>
       </div>
     )
   }
