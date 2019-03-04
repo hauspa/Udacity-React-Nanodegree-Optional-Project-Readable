@@ -137,7 +137,7 @@ class EditPost extends Component {
                 className="btn btn-primary btn-lg"
                 disabled={ author === '' || title === '' || body === '' || category === '' }
                 onClick={this.handleClick}>
-                  <Link to={`/posts/post/${id}`} className='save'>
+                  <Link to={inEditMode ? `/posts/post/${id}` : `/`} className='save'>
                     {pageText}
                   </Link>
               </button>

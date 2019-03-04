@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Categories from './Categories'
 import Post from './Post'
-import { IoIosAddCircleOutline } from 'react-icons/io'
 
 class Home extends Component {
 
@@ -60,15 +59,14 @@ class Home extends Component {
           </nav>
         </div>
 
-        <div className='row wtf justify-content-center'>
-          <div className='flex-column'>
-            <Link to='/posts/add' className='bg-warning d-flex justify-content-center'><IoIosAddCircleOutline /></Link>
-            <div className='bg-danger'>Add new post</div>
-          </div>
+        <div className='row d-flex justify-content-center'>
+          <Link to='/posts/add' className='addButton bg-warning text-center'>
+            Add new post
+          </Link>
         </div>
 
 
-        <div className='row flex-column bg-warning align-items-center'>
+        <div className='row flex-column py-3 align-items-center'>
           {
             sortedPosts.length > 0
               ? sortedPosts.map(post => (

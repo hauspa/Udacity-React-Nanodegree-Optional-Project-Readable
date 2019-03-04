@@ -58,6 +58,13 @@
   font-size: 20px;
 }
 
+.addButton {
+  width: 600px;
+  border-radius: 10px;
+  font-size: 28px;
+  text-decoration: none;
+}
+
 .delete {
   color: red;
 }
