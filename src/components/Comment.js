@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { handleVotingComment } from '../actions/shared'
+import { FiChevronUp, FiChevronDown } from 'react-icons/fi'
 import * as moment from 'moment'
 
 class Comment extends Component {
@@ -15,17 +16,23 @@ class Comment extends Component {
   render(){
     const { comment, onClickingEdit } = this.props
     return (
-      <div>
-         <div>Author: {comment.author}</div>
-         <div>Body: {comment.body}</div>
-         <div>commented on {moment(comment.timestamp).format('MMM Do YYYY')}</div>
-         <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')}>Vote Up</button>
-         <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')}>Vote Down</button>
-         <div>Vote Score: {comment.voteScore}</div>
-         <button onClick={onClickingEdit}>Edit</button>
-         <br></br>
-         <br></br>
-         <br></br>
+      <div className='comment w-100 my-3'>
+        <div className=''>
+          <div className='bg-success'>
+            {comment.author} commented on {moment(comment.timestamp).format('MMM Do YYYY')}
+          </div>
+          <div className='voting'>
+            <div className='row flex-column'>
+              <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')} className='btn'><FiChevronUp /></button>
+              <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')} className='btn'><FiChevronDown /></button>
+              <div>{comment.voteScore}</div>
+            </div>
+          </div>
+        </div>
+        <div className='flex-column'>
+          <div className='py-3'>{comment.body}</div>
+          <button onClick={onClickingEdit} type='button' className='btn bg-link'>Edit Comment</button>
+        </div>
       </div>
     )
   }

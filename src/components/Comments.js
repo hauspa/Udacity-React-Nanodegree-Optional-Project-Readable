@@ -34,7 +34,7 @@ class Comments extends Component {
           comments.length === 0
             ? <p>No Comments for this Post</p>
             : (
-              <div>
+              <div className='comments mx-auto'>
                 {
                   Object.values(comments).map(comment => (
                     <CommentSwitch comment={comment} key={comment.id} />

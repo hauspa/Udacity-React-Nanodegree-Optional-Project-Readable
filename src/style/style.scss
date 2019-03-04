@@ -6,15 +6,21 @@
 
 .post{
   color: white;
+  border-radius: 10px;
   width: 600px;
-  background-color: lightgreen;
+  min-height: 200px;
+  background-color: coral;
   text-align: center;
   margin-top: 10px;
   padding: 20px;
+  a{
+    color: white;
+    text-decoration: none;
+  }
   .voting{
     max-width: 40px;
     background-color: orange;
-    font-size: 20px;
+    font-size: 24px;
   }
   .title{
     font-size: 30px;
@@ -42,14 +48,24 @@
   }
 }
 
+.comments{
+  width: 800px;
+  background-color: coral;
+}
+
+.comment{
+  background-color: yellow;
+  .voting{
+    // max-width: 40px;
+    background-color: green;
+    font-size: 20px;
+  }
+}
+
 .dude{
   background-color: coral;
 }
 
 .wtf{
   background-color: turquoise;
-}
-
-.bg-yellow{
-  background-color: yellow
 }
