@@ -8,6 +8,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 
 // Styling
 import 'bootstrap/dist/css/bootstrap.css'
+import '../style/style.css'
 
 // Components
 import Home from './Home'

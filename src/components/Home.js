@@ -1,42 +1,47 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Categories from './Categories'
+import Post from './Post'
 
 class Home extends Component {
 
+  sortPosts = () => {
+    const { posts } = this.props
+    // TODO: sort by date & voteScore
+    return Object.values(posts).sort((a,b) => b.voteScore - a.voteScore)
+  }
+
   render() {
-    let { categories, posts } = this.props
+    let { categories } = this.props
     return (
       <div>
-        <p>Categories</p>
-        <div>
+        <br></br>
+        <h1 className='text-center'>Posts</h1>
+        <Categories />
+
+
+
+
+
+        <div className='row flex-column bg-warning align-items-center'>
           {
-            categories.map(category => (
-              <Link to={`/posts/category/${category.name}`} key={category.path}><div>{category.name}</div></Link>
+            this.sortPosts().map(post => (
+              <Post post={post} />
             ))
           }
         </div>
-        <br></br>
-        <p>Posts</p>
         {/* TODO: add plus icon  */}
         <Link to='/posts/add'><button>Add New Post</button></Link>
-        <br></br>
-        <br></br>
-        <div>
-          {
-            Object.values(posts).map(post => (
-              <Link to={`/posts/post/${post.id}`} key={post.id}><div>{post.title}</div></Link>
-            ))
-          }
-        </div>
       </div>
     )
   }
 }
 
+// TODO: load comments here too, for isLoading?
 function mapStateToProps({ categories, posts }) {
+
   return {
-    categories,
     posts,
     isLoading: categories.length < 1 || posts.length < 1,
   }

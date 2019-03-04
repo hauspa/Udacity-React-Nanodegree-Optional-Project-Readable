@@ -1,0 +1,19 @@
+.post{
+  color: white;
+  width: 600px;
+  background-color: lightgreen;
+  text-align: center;
+  margin-top: 10px;
+  padding: 20px;
+  .voting{
+    max-width: 40px;
+    background-color: orange;
+    font-size: 30px;    
+  }
+  .title{
+    font-size: 30px;
+  }
+  .author{
+
+  }
+}
