@@ -37,18 +37,23 @@ class PostPage extends Component {
           post === undefined
             ? null
             : (
-              <div>
-                <h1>Post Page</h1>
-                <h2>{post.title || 'Title'}</h2>
-                <h3>By {post.author || 'Author'} on {moment(post.timestamp).format('MMM Do YYYY') || 'Date'}, Category: {post.category || 'Category'}</h3>
-                {/* TODO: Icon for voting up/down */}
-                <button onClick={this.handlePostVote} name='upVote'>Vote Up</button>
-                <button onClick={this.handlePostVote} name='downVote'>Vote Down</button>
-                <p>Vote Score: {post.voteScore}</p>
+              <div className='postPage'>
+                <h1 className='text-center'>Post</h1>
+                <div className='bg-success'>
+                  <div className='title'>{post.title || 'Title'}</div>
+                  <div className='category'>{post.category || 'Category'}</div>
+                  <div className='details'>by {post.author || 'Author'} on {moment(post.timestamp).format('MMM Do YYYY') || 'Date'}</div>
+                  {/* TODO: Icon for voting up/down */}
+                  <button onClick={this.handlePostVote} name='upVote'>Vote Up</button>
+                  <button onClick={this.handlePostVote} name='downVote'>Vote Down</button>
+                  <p>Vote Score: {post.voteScore}</p>
+                </div>
 
-                <p>{post.body}</p>
+                <div className='body px-3'>{post.body}</div>
 
-                <Link to={`/posts/post/${id}/edit`}><button>Edit this Post</button></Link>
+                <Link to={`/posts/post/${id}/edit`}>
+                  <button type='button' className='btn btn-link'>Edit this Post</button>
+                </Link>
                 <br></br>
                 <br></br>
 
