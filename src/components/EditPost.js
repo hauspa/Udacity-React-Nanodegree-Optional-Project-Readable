@@ -6,6 +6,7 @@ import {
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
 import { Link } from 'react-router-dom'
+import _ from 'lodash/string'
 
 const testID = "8xf0y6ziyjabvozdd253nd"
 
@@ -86,12 +87,13 @@ class EditPost extends Component {
   render(){
     const { inEditMode, id, categories } = this.props
     const { title, author, body, category } = this.state
+    const headerText = inEditMode ? 'Edit Post' : 'Add Post'
     const pageText = inEditMode ? 'Save changes' : 'Add Post'
 
     return (
       <div>
-        <h2>{pageText}</h2>
-        <form>
+        <h2 className='my-3 text-center'>{headerText}</h2>
+        <form className='mx-4'>
           <div className="form-row">
             <div className="form-group col">
               <label htmlFor="author">Author</label>
@@ -115,17 +117,12 @@ class EditPost extends Component {
 
           <br></br>
 
-          {/* <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <input type="text" className="form-control" id="category" placeholder="Category" value={category} onChange={this.handleChange} />
-          </div> */}
-
           <div className="form-group">
             <label htmlFor="category">Category</label>
             <select value={category} onChange={this.handleChange} className="form-control" id="category">
               {
                 categories.map(category => (
-                  <option key={category.path} value={category.name} >{category.name}</option>
+                  <option key={category.path} value={category.name}>{_.capitalize(category.name)}</option>
                 ))
               }
             </select>
@@ -134,27 +131,28 @@ class EditPost extends Component {
           <br></br>
 
 
-          <div className='row'>
-            <button
-              type="submit"
-              className="btn btn-primary btn-lg mx-auto"
-              disabled={ author === '' || title === '' || body === '' || category === '' }
-              onClick={this.handleClick}>
-                {pageText}
-            </button>
+          <div className='row d-flex justify-content-end align-items-center'>
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg"
+                disabled={ author === '' || title === '' || body === '' || category === '' }
+                onClick={this.handleClick}>
+                  <Link to={`/posts/post/${id}`} className='save'>
+                    {pageText}
+                  </Link>
+              </button>
             {
               inEditMode
-                ? <Link to={`/posts/post/${id}`}><button>Cancel</button></Link>
-                : <Link to='/'><button>Cancel</button></Link>
+                ? <Link to={`/posts/post/${id}`}><button type='button' className='btn btn-link'>Cancel</button></Link>
+                : <Link to='/'><button type='button' className='btn btn-link'>Cancel</button></Link>
+            }
+            {
+              inEditMode
+                ? <button onClick={this.clickedDelete} type='button' className='btn btn-link delete'>Delete Post</button>
+                : null
             }
           </div>
         </form>
-        <br></br>
-        {
-          inEditMode
-            ? <button onClick={this.clickedDelete}>Delete Post</button>
-            : null
-        }
       </div>
     )
   }

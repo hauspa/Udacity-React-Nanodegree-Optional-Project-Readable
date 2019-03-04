@@ -58,6 +58,18 @@
   font-size: 20px;
 }
 
+.delete {
+  color: red;
+}
+
+form a {
+  text-decoration: none;
+}
+form .save {
+  color: white;
+  text-decoration: none;
+}
+
 .dude {
   background-color: coral;
 }
