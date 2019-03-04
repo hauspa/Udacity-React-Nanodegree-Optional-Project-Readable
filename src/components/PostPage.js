@@ -7,6 +7,7 @@ import {
 import Comments from './Comments'
 import * as moment from 'moment'
 import { Link } from 'react-router-dom'
+import { FiChevronUp, FiChevronDown } from 'react-icons/fi'
 
 class PostPage extends Component {
 
@@ -21,10 +22,9 @@ class PostPage extends Component {
     //   })))
   }
 
-  handlePostVote = (e) => {
+  handlePostVote = (e, vote) => {
     const { votePost, id } = this.props
     e.preventDefault()
-    const vote = e.target.name
     // TODO: can only once once per session/post.
     votePost(id, vote)
   }
@@ -42,13 +42,20 @@ class PostPage extends Component {
                   <div className='title'>{post.title || 'Title'}</div>
                   <div className='category'>{post.category || 'Category'}</div>
                   <div className='details'>by {post.author || 'Author'} on {moment(post.timestamp).format('MMM Do YYYY') || 'Date'}</div>
-                  {/* TODO: Icon for voting up/down */}
-                  <button onClick={this.handlePostVote} name='upVote'>Vote Up</button>
-                  <button onClick={this.handlePostVote} name='downVote'>Vote Down</button>
-                  <p>Vote Score: {post.voteScore}</p>
+                  <div className='row voting py-3'>
+                    <div className='col d-flex justify-content-end align-items-center'>
+                      <div>{post.voteScore}</div>
+                    </div>
+                    <div className='col'>
+                      <div className='row flex-column align-items-start'>
+                        <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn bg-warning'><FiChevronUp /></button>
+                        <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn bg-warning'><FiChevronDown /></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className='body px-3'>{post.body}</div>
+                <div className='body pt-5 pb-2'>{post.body}</div>
 
                 <Link to={`/posts/post/${id}/edit`}>
                   <button type='button' className='btn btn-link'>Edit this Post</button>

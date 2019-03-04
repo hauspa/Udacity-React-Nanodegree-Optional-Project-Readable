@@ -41,6 +41,9 @@
 .postPage .body {
   font-size: 34px;
 }
+.postPage .voting {
+  font-size: 30px;
+}
 
 .comments {
   width: 800px;
