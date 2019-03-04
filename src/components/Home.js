@@ -13,7 +13,6 @@ class Home extends Component {
   }
 
   setCategory = (e, category) => {
-    console.log('Setting active category: ', category)
     this.setState((prevState) => ({
       ...prevState,
       // if category is already active, then set to null again!
@@ -34,7 +33,7 @@ class Home extends Component {
     let postsArray = Object.values(posts)
     if (activeCategory !== '') {
       // show only posts for active category
-      postsArray = postsArray.filter(post => post.category === activeCategory) 
+      postsArray = postsArray.filter(post => post.category === activeCategory)
     }
     // sort by votescore or date
     return sortByVote
@@ -45,6 +44,7 @@ class Home extends Component {
   render() {
     const { categories } = this.props
     const { sortByVote, activeCategory } = this.state
+    const sortedPosts = this.sortPosts()
     return (
       <div>
         <br></br>
@@ -70,9 +70,11 @@ class Home extends Component {
 
         <div className='row flex-column bg-warning align-items-center'>
           {
-            this.sortPosts().map(post => (
-              <Post post={post} />
-            ))
+            sortedPosts.length > 0
+              ? sortedPosts.map(post => (
+                <Post post={post} key={post.id} />
+              ))
+              : <div>There are no posts under this category</div>
           }
         </div>
       </div>

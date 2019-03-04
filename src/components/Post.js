@@ -19,7 +19,7 @@ class Post extends Component {
     return(
         <div className='row post'>
           <div className='col flex-1'>
-            <Link to={`/posts/post/${post.id}`} key={post.id}>
+            <Link to={`/posts/post/${post.id}`}>
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>

@@ -6,24 +6,17 @@ import _ from 'lodash/string'
 
 class Categories extends Component {
 
-
-
   render(){
     const { categories, activeCategory, onClickingCategory } = this.props
-    console.log('Active Category DUDE: ', activeCategory)
     return(
       <div className='row justify-content-center'>
         <ul className="nav nav-pills nav-fill">
           {
             categories.map(category => (
-              <li key={category.path}
-                className="nav-item px-4"
-                onClick={(e)=> onClickingCategory(e, category.name)}
-              >
+              <li key={category.path} className="nav-item px-4" onClick={(e)=> onClickingCategory(e, category.name)}>
                 {/* <Link to={`/posts/category/${category.name}`} className={"nav-link " + activeCategory === category.name ? "active" : ""}> */}
                 <Link to='' className={"nav-link " + (activeCategory === category.name ? "active" : "")}>
                   {_.capitalize(category.name)}
-                  {/* <div>{_.capitalize(category.name)}</div> */}
                 </Link>
               </li>
             ))
@@ -36,6 +29,7 @@ class Categories extends Component {
 
 Categories.propTypes = {
   onClickingCategory: PropTypes.func.isRequired,
+  activeCategory: PropTypes.string.isRequired,
 }
 
 function mapStateToProps({ categories }) {
