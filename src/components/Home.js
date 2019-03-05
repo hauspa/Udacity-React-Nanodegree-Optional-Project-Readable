@@ -71,7 +71,7 @@ class Home extends Component {
               ? sortedPosts.map(post => (
                 <Post post={post} key={post.id} />
               ))
-              : <div>There are no posts under this category</div>
+              : <div className='my-3'>There are no posts under this category</div>
           }
         </div>
       </div>
