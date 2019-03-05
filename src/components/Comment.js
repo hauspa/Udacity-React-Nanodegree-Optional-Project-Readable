@@ -9,7 +9,6 @@ class Comment extends Component {
 
   handleCommentVote = (e, id, vote) => {
     e.preventDefault()
-    // TODO: can only once once per session/comment.
     this.props.voteComment(id, vote)
   }
 
@@ -51,11 +50,7 @@ Comment.propTypes = {
   onClickingEdit: PropTypes.func.isRequired,
 }
 
-function mapStateToProps() {
-  return {
-
-  }
-}
+function mapStateToProps() {return {}}
 
 function mapDispatchToProps(dispatch) {
   return {

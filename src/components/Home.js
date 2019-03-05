@@ -81,10 +81,4 @@ function mapStateToProps({ categories, posts }, { match }) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-
-  }
-}
-
 export default connect(mapStateToProps)(Home)

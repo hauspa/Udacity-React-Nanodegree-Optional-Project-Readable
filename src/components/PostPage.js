@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as PostsAPI from '../utils/api/posts'
 import {
   handleVotingPost,
 } from '../actions/shared'
@@ -11,21 +10,9 @@ import { FiChevronUp, FiChevronDown } from 'react-icons/fi'
 
 class PostPage extends Component {
 
-  componentDidMount = () => {
-    const { loadPost, loadComments } = this.props
-
-    // TODO: maybe still use API with Redux??
-    // loadPost(testID)
-    //   .then((post) => this.setState((prevState) => ({
-    //     ...prevState,
-    //     post
-    //   })))
-  }
-
   handlePostVote = (e, vote) => {
     const { votePost, id } = this.props
     e.preventDefault()
-    // TODO: can only once once per session/post.
     votePost(id, vote)
   }
 
@@ -79,9 +66,8 @@ class PostPage extends Component {
 function mapStateToProps({ posts }, { match }) {
   const id = match.params.id
   const post = Object.values(posts).filter(post => post.id === id)[0] // grab first object, since filter() returns an array
-  console.log('post: ', post)
   return {
-    post, // TODO: Could use both API & Redux together!!!
+    post,
     id,
   }
 }
@@ -89,7 +75,6 @@ function mapStateToProps({ posts }, { match }) {
 function mapDispatchToProps(dispatch) {
   return {
     // use API to get post instead of mapStateToProps, because get comments count automatically!
-    loadPost: (id) => PostsAPI.getPost(id),
     votePost: (id, option) => dispatch(handleVotingPost(id, option)),
   }
 }

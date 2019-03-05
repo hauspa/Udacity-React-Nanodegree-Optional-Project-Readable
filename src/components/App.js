@@ -1,28 +1,19 @@
 import React, { Component } from 'react'
 import '../App.css'
-import { getCategories as CategoriesAPI }  from '../utils/api/categories'
-import * as PostsAPI from '../utils/api/posts'
-import * as CommentsAPI from '../utils/api/comments'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
+import { handleInitialData } from '../actions/shared'
+
+// Components
+import Home from './Home'
+import EditPost from './EditPost'
+import PostPage from './PostPage'
+import ErrorPage from './ErrorPage'
 
 // Styling
 import 'bootstrap/dist/css/bootstrap.css'
 import '../style/style.css'
 
-// Components
-import Home from './Home'
-import PostsByCategory from './PostsByCategory'
-import EditPost from './EditPost'
-import PostPage from './PostPage'
-import ErrorPage from './ErrorPage'
-
-import {
-  handleInitialData,
-} from '../actions/shared'
-
-// save as property, so that when changing URL anytime, there's no problem!
-const prefixForPosts = '/posts/post/'
 
 class App extends Component {
 
@@ -45,7 +36,7 @@ class App extends Component {
                   isValidCategory &&
                     <Route exact path='/:category' component={Home} />
                 }
-                <Route path={`${prefixForPosts}:id/edit`} component={EditPost} />
+                <Route path={`/posts/post/:id/edit`} component={EditPost} />
                 <Route path={`/posts/add`} component={EditPost} />
                 {
                   // before going to a page with id, check whether exists
@@ -81,4 +72,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
+// need withRouter to use location prop
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))

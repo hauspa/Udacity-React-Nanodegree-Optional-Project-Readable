@@ -38,4 +38,5 @@ function mapStateToProps({ categories }, { match }) {
   }
 }
 
+// need withRouter to use match prop
 export default withRouter(connect(mapStateToProps)(Categories))

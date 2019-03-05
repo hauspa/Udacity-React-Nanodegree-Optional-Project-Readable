@@ -87,10 +87,7 @@ Comments.propTypes = {
 }
 
 function mapStateToProps({ comments }, { id }) {
-  console.log('ID: ', id)
-  console.log('Comments: ', Object.values(comments))
   const onlyForThisPost = Object.values(comments).filter(comment => comment.parentId === id)
-  console.log('Comments For this post: ', onlyForThisPost)
   return {
     postComments: onlyForThisPost,
   }

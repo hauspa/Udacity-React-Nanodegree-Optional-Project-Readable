@@ -10,7 +10,6 @@ class Post extends Component {
   handlePostVote = (e, option) => {
     const { votePost, post } = this.props
     e.preventDefault()
-    // TODO: can only once once per session/post.
     votePost(post.id, option)
   }
 
@@ -56,11 +55,7 @@ Post.propTypes = {
   post: PropTypes.object.isRequired,
 }
 
-function mapStateToProps() {
-  return {
-
-  }
-}
+function mapStateToProps() {return {}}
 
 function mapDispatchToProps(dispatch){
   return {
