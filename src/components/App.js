@@ -98,7 +98,7 @@ class App extends Component {
   }
 
   render() {
-    let { isLoading, postKeys, postID } = this.props
+    let { isLoading, isValidCategory, isValidPost } = this.props
     return (
       <div>
         {
@@ -107,14 +107,18 @@ class App extends Component {
             : (
               <Switch>
                 <Route exact path='/' component={Home} />
-                {/* <Route path='/:category' component={PostsByCategory} /> */}
                 {/* TODO: if Category or ID doesn't exist -> 404 Page! */}
-                <Route exact path='/:category' component={Home} />
+                {
+                  // check whether Category exists
+                  isValidCategory &&
+                    <Route exact path='/:category' component={Home} />
+                }
+                {/* <Route exact path='/:category' component={Home} /> */}
                 <Route path={`${prefixForPosts}:id/edit`} component={EditPost} />
                 <Route path={`/posts/add`} component={EditPost} />
                 {
                   // before going to a page with id, check whether exists
-                  postKeys.includes(postID) &&
+                  isValidCategory && isValidPost &&
                     <Route path={`/:category/:id`} component={PostPage} />
                 }
                 <Route component={ErrorPage} />
@@ -129,13 +133,24 @@ class App extends Component {
 // TODO: add comments in mapStateToProps as well? in case directly access post page?
 function mapStateToProps({ categories, posts }, { location }) {
   // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
-  const removeFirstSlash = location.pathname.substring('/'.length)
-  const secondSlash = removeFirstSlash.indexOf('/')
-  const id = removeFirstSlash.substring((secondSlash + 1))
+  const afterFirstSlash = location.pathname.substring('/'.length)
+  const secondSlash = afterFirstSlash.indexOf('/')
+  const paramCategory = afterFirstSlash.includes('/') ? afterFirstSlash.substring(0, secondSlash) : afterFirstSlash
+  const paramId = afterFirstSlash.substring((secondSlash + 1))
+
+  let isValidCategory = false
+  categories.forEach(category => {
+    if(category.name === paramCategory){
+      isValidCategory = true
+    }
+  })
+
   return {
     isLoading: categories.length < 1 || posts.length < 1,
-    postKeys: Object.keys(posts),
-    postID: id,
+    // postKeys: Object.keys(posts),
+    // postID: paramId,
+    isValidCategory,
+    isValidPost: Object.keys(posts).includes(paramId),
   }
 }
 
