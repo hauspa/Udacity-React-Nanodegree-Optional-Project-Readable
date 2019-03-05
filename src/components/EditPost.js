@@ -5,7 +5,7 @@ import {
   handleEditingPost, handleAddingPost, handleDeletingPost,
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import _ from 'lodash/string'
 
 class EditPost extends Component {
@@ -15,11 +15,14 @@ class EditPost extends Component {
     author: '',
     body: '',
     category: '',
+    goBack: false,
+    redirectToPost: false,
   }
 
   updateState = (post) => {
     const { categories } = this.props
     this.setState((prevState) => ({
+      ...prevState,
       title: post.title,
       author: post.author,
       body: post.body,
@@ -66,6 +69,7 @@ class EditPost extends Component {
 
     if (inEditMode) {
       editPost(id, newPost)
+        .then(() => this.goBack(true))
     }
     else{ // = createPost method
       newPost = {
@@ -74,21 +78,42 @@ class EditPost extends Component {
         timestamp: Date.now(),
       }
       addPost(newPost)
+        .then(() => this.goBack(false))
     }
   }
 
   clickedDelete = (e) => {
-    const { deletePost, id } = this.props
+    const { deletePost, id, history } = this.props
     e.preventDefault()
     deletePost(id)
+      .then(() => history.push('/'))
+  }
+
+  goBack = (shouldGoToPost) => {
+    // imperative routing!
+    this.setState((prevState) => ({
+      ...prevState,
+      goBack: true,
+      redirectToPost: shouldGoToPost,
+    }))
   }
 
   render(){
     const { inEditMode, id, categories } = this.props
-    const { title, author, body, category } = this.state
+    const { title, author, body, category, goBack, redirectToPost } = this.state
     const headerText = inEditMode ? 'Edit Post' : 'Add Post'
     const pageText = inEditMode ? 'Save changes' : 'Add Post'
     const disabled = author === '' || title === '' || body === '' // don't check whether category
+
+    // imperative routing!
+    if (goBack) {
+      if(redirectToPost){
+        return <Redirect to={`/${category}/${id}`} />
+      }
+      else{ // go home
+        return <Redirect to='/' />
+      }
+    }
 
     return (
       <div>
@@ -137,20 +162,12 @@ class EditPost extends Component {
                 className="btn btn-primary btn-lg"
                 disabled={disabled}
                 onClick={this.handleClick}>
-                  {
-                    disabled
-                      ? pageText
-                      : (
-                        <Link to={inEditMode ? `/posts/post/${id}` : `/`} className='save'>
-                          {pageText}
-                        </Link>
-                      )
-                  }
+                  {pageText}
               </button>
             {
               inEditMode
-                ? <Link to={`/posts/post/${id}`}><button type='button' className='btn btn-link'>Cancel</button></Link>
-                : <Link to='/'><button type='button' className='btn btn-link'>Cancel</button></Link>
+                ? <button onClick={() => this.goBack(true)} type='button' className='btn btn-link'>Cancel</button>
+                : <button onClick={() => this.goBack(false)} type='button' className='btn btn-link'>Cancel</button>
             }
             {
               inEditMode

@@ -61,8 +61,7 @@ class App extends Component {
   }
 }
 
-// TODO: add comments in mapStateToProps as well? in case directly access post page?
-function mapStateToProps({ categories, posts }, { location }) {
+function mapStateToProps({ categories, posts, comments }, { location }) {
   // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
   const afterFirstSlash = location.pathname.substring('/'.length)
   const secondSlash = afterFirstSlash.indexOf('/')
@@ -70,7 +69,7 @@ function mapStateToProps({ categories, posts }, { location }) {
   const paramId = afterFirstSlash.substring((secondSlash + 1))
 
   return {
-    isLoading: categories.length < 1 || posts.length < 1,
+    isLoading: categories.length < 1 || posts.length < 1 || comments.length < 1,
     isValidCategory: categories.some(category => category.name === paramCategory),
     isValidPost: Object.keys(posts).includes(paramId),
   }
