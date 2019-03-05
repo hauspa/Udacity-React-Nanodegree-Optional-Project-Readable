@@ -9,12 +9,11 @@ class Categories extends Component {
   render(){
     const { categories, activeCategory, onClickingCategory } = this.props
     return(
-      <div className='row justify-content-center'>
+      <div className='row justify-content-center my-2 categories'>
         <ul className="nav nav-pills nav-fill">
           {
             categories.map(category => (
               <li key={category.path} className="nav-item px-4" onClick={(e)=> onClickingCategory(e, category.name)}>
-                {/* <Link to={`/posts/category/${category.name}`} className={"nav-link " + activeCategory === category.name ? "active" : ""}> */}
                 <Link to='' className={"nav-link " + (activeCategory === category.name ? "active" : "")}>
                   {_.capitalize(category.name)}
                 </Link>

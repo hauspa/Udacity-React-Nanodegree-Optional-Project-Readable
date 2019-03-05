@@ -11,6 +11,7 @@
 .categories {
   margin-left: 50px;
   margin-right: 50px;
+  font-size: 24px;
 }
 
 .post {
@@ -18,7 +19,6 @@
   border-radius: 10px;
   width: 500px;
   min-height: 200px;
-  background-color: coral;
   text-align: center;
   margin-top: 10px;
   padding: 20px;
@@ -29,7 +29,6 @@
 }
 .post .voting {
   max-width: 40px;
-  background-color: orange;
   font-size: 24px;
 }
 .post .title {
@@ -93,14 +92,6 @@ form a {
 form .save {
   color: white;
   text-decoration: none;
-}
-
-.dude {
-  background-color: coral;
-}
-
-.wtf {
-  background-color: turquoise;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -49,8 +49,8 @@ class Home extends Component {
         <h1 className='text-center my-2'>Readable</h1>
         <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} />
 
-        <div className='row py-2 dude justify-content-center'>
-          <nav className='bg-secondary d-flex align-items-center'>
+        <div className='row py-2 justify-content-center'>
+          <nav className='d-flex align-items-center'>
             <ul className="pagination bg-primary">
               <li className={"page-item " + (sortByVote ? 'active' : '')} onClick={() => this.changeSorting(true)}><button className="page-link">Vote Score</button></li>
               <li className={"page-item " + (sortByVote ? '' : 'active')} onClick={() => this.changeSorting(false)}><button className="page-link">Date</button></li>
@@ -59,13 +59,13 @@ class Home extends Component {
         </div>
 
         <div className='row d-flex justify-content-center my-1'>
-          <Link to='/posts/add' className='addButton bg-warning text-center py-3'>
+          <Link to='/posts/add' className='addButton bg-primary text-center p-3'>
             Add new post
           </Link>
         </div>
 
 
-        <div className='row flex-column align-items-center'>
+        <div className='row flex-column align-items-center mb-4'>
           {
             sortedPosts.length > 0
               ? sortedPosts.map(post => (

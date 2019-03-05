@@ -17,15 +17,15 @@ class Post extends Component {
   render(){
     const { post } = this.props
     return(
-        <div className='row post'>
-          <div className='col flex-1'>
+        <div className='row post bg-primary'>
+          <div className='col flex-1 d-flex align-items-center justify-content-center'>
             <Link to={`/posts/post/${post.id}`}>
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>
             </Link>
           </div>
-          <div className='col voting'>
+          <div className='col voting d-flex justify-content-center align-items-center'>
             <div className='row flex-column'>
               <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn btn-light'><FiChevronUp size={26} /></button>
               <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn btn-light my-1'><FiChevronDown size={26} /></button>
