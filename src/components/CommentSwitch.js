@@ -9,7 +9,7 @@ class CommentSwitch extends Component {
     isDisplayMode: true,
   }
 
-  changeMode = () => {
+  switchMode = () => {
     console.log('Changing Mode to Edit/Display Mode')
     this.setState((prevState) => ({
       // ...prevState,
@@ -24,8 +24,8 @@ class CommentSwitch extends Component {
       <div>
         {
           isDisplayMode
-            ? <Comment comment={comment} onClickingEdit={this.changeMode} />
-            : <EditComment onClickingEdit={this.changeMode} id={comment.id} parent={comment.parentId} />
+            ? <Comment comment={comment} onClickingEdit={this.switchMode} />
+            : <EditComment onClickingEdit={this.switchMode} id={comment.id} parent={comment.parentId} />
         }
       </div>
     )

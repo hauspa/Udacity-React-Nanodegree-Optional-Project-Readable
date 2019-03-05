@@ -5,9 +5,6 @@ import CommentSwitch from './CommentSwitch'
 import EditComment from './EditComment'
 import PropTypes from 'prop-types'
 
-const testID = "8xf0y6ziyjabvozdd253nd"
-
-
 class Comments extends Component {
 
   state = {
@@ -28,15 +25,18 @@ class Comments extends Component {
   render(){
     const { comments } = this.props
     const { isAddMode } = this.state
+    console.log('Comments: ', comments)
+    const filteredComments = Object.values(comments).filter(comment => comment.deleted === false) // filter out the deleted comments
     return (
       <div>
         {
-          comments.length === 0
+          filteredComments.length === 0
             ? <p>No Comments for this Post</p>
             : (
               <div className='comments mx-auto'>
+                <h3>{filteredComments.length} comments</h3>
                 {
-                  Object.values(comments).map(comment => (
+                  filteredComments.map(comment => (
                     <CommentSwitch comment={comment} key={comment.id} />
                   ))
                 }
@@ -45,7 +45,7 @@ class Comments extends Component {
                 {
                   isAddMode
                     ? <EditComment  />
-                    : <button onClick={this.showNewCommentInput}>Add Comment</button>
+                    : <button onClick={this.showNewCommentInput} className='btn btn-success'>Add Comment</button>
                 }
 
                 <br></br>

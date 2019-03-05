@@ -62,8 +62,7 @@ class PostPage extends Component {
                 </Link>
                 <br></br>
                 <br></br>
-
-                <h3>{post.commentCount} comments</h3>
+                
                 <Comments id={id} />
               </div>
             )

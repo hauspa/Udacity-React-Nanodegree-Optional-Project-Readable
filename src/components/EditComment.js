@@ -74,9 +74,16 @@ class EditComment extends Component {
   }
 
   clickedDelete = (e) => {
-    const { id } = this.props
+    const { id, deleteComment, onClickingEdit } = this.props
     e.preventDefault()
-    this.props.deleteComment(id)
+    deleteComment(id)
+    onClickingEdit()
+  }
+
+  clickedCancel = (e) => {
+    const { onClickingEdit } = this.props
+    e.preventDefault()
+    onClickingEdit()
   }
 
   render(){
@@ -99,7 +106,7 @@ class EditComment extends Component {
             </div>
           </div>
 
-          <div className='row'>
+          <div className='row d-flex align-items-center justify-content-end'>
             <button
               type="submit"
               className="btn btn-primary btn-lg mx-auto"
@@ -111,7 +118,12 @@ class EditComment extends Component {
             </button>
             {
               inEditMode
-                ? <button onClick={this.clickedDelete}>Delete</button>
+                ? (
+                  <div>
+                    <button onClick={this.clickedCancel} className='btn btn-link'>Cancel</button>
+                    <button onClick={this.clickedDelete} className='btn btn-link delete'>Delete</button>
+                  </div>
+                )
                 : null
             }
           </div>
