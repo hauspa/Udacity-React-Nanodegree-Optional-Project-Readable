@@ -23,9 +23,9 @@ class Comments extends Component {
   }
 
   render(){
-    const { comments, id } = this.props
+    const { postComments, id } = this.props
     const { isAddMode } = this.state
-    const filteredComments = Object.values(comments).filter(comment => comment.deleted === false).sort((a, b) => a.timestamp - b.timestamp) // filter out the deleted comments
+    const filteredComments = postComments.filter(comment => comment.deleted === false).sort((a, b) => a.timestamp - b.timestamp) // filter out the deleted comments
     return (
       <div>
         {
@@ -75,9 +75,13 @@ Comments.propTypes = {
   id: PropTypes.string.isRequired,
 }
 
-function mapStateToProps({ comments }) {
+function mapStateToProps({ comments }, { id }) {
+  console.log('ID: ', id)
+  console.log('Comments: ', Object.values(comments))
+  const onlyForThisPost = Object.values(comments).filter(comment => comment.parentId === id)
+  console.log('Comments For this post: ', onlyForThisPost)
   return {
-    comments,
+    postComments: onlyForThisPost,
   }
 }
 
