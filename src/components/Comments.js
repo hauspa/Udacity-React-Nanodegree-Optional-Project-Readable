@@ -44,8 +44,8 @@ class Comments extends Component {
 
                 {
                   isAddMode
-                    ? <EditComment  />
-                    : <button onClick={this.showNewCommentInput} className='btn btn-success'>Add Comment</button>
+                    ? <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                    : <button onClick={this.showNewCommentInput} className='btn btn-lg btn-success'>Add Comment</button>
                 }
 
                 <br></br>

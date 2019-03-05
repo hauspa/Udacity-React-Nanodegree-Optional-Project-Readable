@@ -8,9 +8,6 @@ import uuidv1 from 'uuid/v1'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-// const testID = "8xf0y6ziyjabvozdd253nd"
-// const commentID = "894tuq4ut84ut8v4t8wun89g"
-
 class EditComment extends Component {
 
   state = {
@@ -93,7 +90,7 @@ class EditComment extends Component {
     return (
       <div className='mt-4'>
         <h4>{inEditMode ? 'Edit Comment' : 'Add Comment'}</h4>
-        <form>
+        <form className='py-3'>
           <div className="form-row">
             <div className="form-group col">
               <label htmlFor="comment">Comment</label>
@@ -118,14 +115,10 @@ class EditComment extends Component {
                   inEditMode ? 'Save changes' : 'Add Comment'
                 }
             </button>
+            <button onClick={this.clickedCancel} className='btn btn-link'>Cancel</button>
             {
               inEditMode
-                ? (
-                  <div>
-                    <button onClick={this.clickedCancel} className='btn btn-link'>Cancel</button>
-                    <button onClick={this.clickedDelete} className='btn btn-link delete'>Delete</button>
-                  </div>
-                )
+                ? <button onClick={this.clickedDelete} className='btn btn-link delete'>Delete</button>
                 : null
             }
           </div>
@@ -139,12 +132,13 @@ EditComment.propTypes = {
   id: PropTypes.string,
   parent: PropTypes.string,
   onClickingEdit: PropTypes.func.isRequired,
+  inEditMode: PropTypes.bool.isRequired,
 }
 
 function mapStateToProps() {
   return {
     // TODO: determine whether edit or add mode via url param id
-    inEditMode: true,
+    // inEditMode: true,
     // commentID
   }
 }
