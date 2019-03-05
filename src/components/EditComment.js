@@ -87,7 +87,7 @@ class EditComment extends Component {
     const { body, author } = this.state
     const { inEditMode } = this.props
     return (
-      <div className='mt-4'>
+      <div className='mt-4 border p-2 comment'>
         <h4>{inEditMode ? 'Edit Comment' : 'Add Comment'}</h4>
         <form className='py-3'>
           <div className="form-row">

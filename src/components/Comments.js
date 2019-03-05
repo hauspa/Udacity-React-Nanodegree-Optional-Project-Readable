@@ -30,7 +30,20 @@ class Comments extends Component {
       <div>
         {
           filteredComments.length === 0
-            ? <p>No Comments for this Post</p>
+            ? (
+              <div>
+                <h3>No Comments for this Post</h3>
+                {
+                  isAddMode
+                    ? (
+                      <div className='comments mx-auto'>
+                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                      </div>
+                    )
+                    : <button onClick={this.showNewCommentInput} className='btn btn-lg btn-primary mb-3'>Add Comment</button>
+                }
+              </div>
+            )
             : (
               <div className='comments mx-auto'>
                 <h3>{filteredComments.length} comments</h3>
@@ -40,13 +53,15 @@ class Comments extends Component {
                   ))
                 }
                 <br></br>
-
                 {
                   isAddMode
-                    ? <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                    ? (
+                      <div className='comments mx-auto'>
+                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                      </div>
+                    )
                     : <button onClick={this.showNewCommentInput} className='btn btn-lg btn-primary mb-3'>Add Comment</button>
                 }
-
                 <br></br>
               </div>
             )
