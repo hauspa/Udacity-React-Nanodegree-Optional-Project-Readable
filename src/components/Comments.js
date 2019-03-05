@@ -23,7 +23,7 @@ class Comments extends Component {
   }
 
   render(){
-    const { comments } = this.props
+    const { comments, id } = this.props
     const { isAddMode } = this.state
     const filteredComments = Object.values(comments).filter(comment => comment.deleted === false).sort((a, b) => a.timestamp - b.timestamp) // filter out the deleted comments
     return (
@@ -37,7 +37,7 @@ class Comments extends Component {
                   isAddMode
                     ? (
                       <div className='comments mx-auto'>
-                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} parent={id} />
                       </div>
                     )
                     : <button onClick={this.showNewCommentInput} className='btn btn-lg btn-primary mb-3'>Add Comment</button>
@@ -57,7 +57,7 @@ class Comments extends Component {
                   isAddMode
                     ? (
                       <div className='comments mx-auto'>
-                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} />
+                        <EditComment inEditMode={false} onClickingEdit={this.showNewCommentInput} parent={id} />
                       </div>
                     )
                     : <button onClick={this.showNewCommentInput} className='btn btn-lg btn-primary mb-3'>Add Comment</button>

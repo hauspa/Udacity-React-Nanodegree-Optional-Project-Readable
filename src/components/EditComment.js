@@ -65,6 +65,8 @@ class EditComment extends Component {
         id: uuidv1(),
         parentId: parent,
       }
+      console.log('Adding comment: ', newComment)
+      console.log('Parent: ', parent)
       addComment(newComment)
         .then(() => onClickingEdit()) // go back to only displaying the comment
     }
@@ -129,7 +131,7 @@ class EditComment extends Component {
 
 EditComment.propTypes = {
   id: PropTypes.string,
-  parent: PropTypes.string,
+  parent: PropTypes.string.isRequired,
   onClickingEdit: PropTypes.func.isRequired,
   inEditMode: PropTypes.bool.isRequired,
 }
