@@ -60,14 +60,14 @@ class PostPage extends Component {
                   <div className='body pt-5 pb-2'>{post.body}</div>
 
                   <Link to={`/posts/post/${id}/edit`}>
-                  <button type='button' className='btn btn-link'>Edit this Post</button>
-                </Link>
-                <br></br>
-                <br></br>
-                <br></br>
+                    <button type='button' className='btn btn-link'>Edit this Post</button>
+                  </Link>
+                  <br></br>
+                  <br></br>
+                  <br></br>
 
-                <Comments id={id} />
-              </div>
+                  <Comments id={id} />
+                </div>
               </div>
             )
         }

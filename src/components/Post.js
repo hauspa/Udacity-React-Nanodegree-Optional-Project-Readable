@@ -37,11 +37,14 @@ class Post extends Component {
               <h4 className='mt-5'>{this.displayCommentCount(post.commentCount)}</h4>
             </Link>
           </div>
-          <div className='col voting d-flex justify-content-center align-items-center'>
+          <div className='col voting d-flex justify-content-center align-items-end'>
             <div className='row flex-column'>
               <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn btn-light'><FiChevronUp size={26} /></button>
               <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn btn-light my-1'><FiChevronDown size={26} /></button>
               <div>{post.voteScore}</div>
+              <Link to={`/posts/post/${post.id}/edit`} className='mt-5'>
+                <button type='button' className='btn btn-link edit'>Edit</button>
+              </Link>
             </div>
           </div>
         </div>

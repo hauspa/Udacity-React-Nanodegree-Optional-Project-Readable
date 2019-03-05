@@ -86,6 +86,14 @@
   color: red;
 }
 
+.edit {
+  color: white;
+}
+.edit:hover {
+  color: white;
+  text-decoration: none;
+}
+
 form a {
   text-decoration: none;
 }
