@@ -18,7 +18,7 @@ class PostPage extends Component {
   }
 
   render(){
-    const { comments, post, id } = this.props
+    const { post, id } = this.props
     return (
       <div>
         {

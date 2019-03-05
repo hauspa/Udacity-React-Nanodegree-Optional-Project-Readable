@@ -10,9 +10,7 @@ class CommentSwitch extends Component {
   }
 
   switchMode = () => {
-    console.log('Changing Mode to Edit/Display Mode')
     this.setState((prevState) => ({
-      // ...prevState,
       isDisplayMode: !prevState.isDisplayMode
     }))
   }

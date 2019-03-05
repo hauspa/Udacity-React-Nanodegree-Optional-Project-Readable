@@ -1,6 +1,6 @@
 import {
   GET_COMMENTS_FOR_POST, ADD_COMMENT,
-  GET_COMMENT, EDIT_COMMENT, DELETE_COMMENT,
+  EDIT_COMMENT, DELETE_COMMENT,
   VOTE_COMMENT
 } from '../actions/comments'
 import _ from 'lodash'

@@ -12,7 +12,7 @@ class Categories extends Component {
   }
 
   render(){
-    const { categories, activeCategory } = this.props
+    const { categories } = this.props
     return(
       <div className='row justify-content-center my-2 categories'>
         <ul className="nav nav-pills nav-fill">

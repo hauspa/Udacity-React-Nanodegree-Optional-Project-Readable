@@ -20,7 +20,7 @@ class Home extends Component {
 
   sortPosts = () => {
     const { posts, category } = this.props
-    const { sortByVote, activeCategory } = this.state
+    const { sortByVote } = this.state
     let postsArray = Object.values(posts)
     if (category !== '') {
       // show only posts for active category
@@ -33,7 +33,6 @@ class Home extends Component {
   }
 
   render() {
-    const { categories } = this.props
     const { sortByVote } = this.state
     const sortedPosts = this.sortPosts()
     return (

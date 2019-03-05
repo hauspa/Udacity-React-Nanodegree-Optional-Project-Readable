@@ -21,7 +21,6 @@ class EditPost extends Component {
   }
 
   updateState = (post) => {
-    const { categories } = this.props
     this.setState((prevState) => ({
       ...prevState,
       title: post.title,
