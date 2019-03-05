@@ -8,16 +8,7 @@ class Home extends Component {
 
   state = {
     sortByVote: true,
-    // activeCategory: '',
   }
-
-  // setCategory = (e, category) => {
-  //   this.setState((prevState) => ({
-  //     ...prevState,
-  //     // if category is already active, then set to null again!
-  //     activeCategory: prevState.activeCategory === category ? '' : category
-  //   }))
-  // }
 
   changeSorting = (byVote) => {
     this.setState((prevState) => ({
@@ -47,7 +38,7 @@ class Home extends Component {
     return (
       <div>
         <Link to='' className='logo'><h1 className='text-center my-2'>Readable</h1></Link>
-        {/* <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} /> */}
+
         <Categories />
 
         <div className='row py-2 justify-content-center'>
