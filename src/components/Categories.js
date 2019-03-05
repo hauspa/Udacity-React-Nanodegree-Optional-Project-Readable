@@ -6,6 +6,11 @@ import _ from 'lodash/string'
 
 class Categories extends Component {
 
+  isActive = (category) => {
+    const { activeCategory } = this.props
+    return activeCategory === category.name
+  }
+
   render(){
     const { categories, activeCategory } = this.props
     return(
@@ -14,7 +19,8 @@ class Categories extends Component {
           {
             categories.map(category => (
               <li key={category.path} className="nav-item px-4">
-                <Link to={`/${category.path}`} className={"nav-link " + (activeCategory === category.name ? "active" : "")}>
+                {/* if already active, then go back home to include all categories! */}
+                <Link to={this.isActive(category) ? '/' : `/${category.path}`} className={"nav-link " + (this.isActive(category) ? "active" : "")}>
                   {_.capitalize(category.name)}
                 </Link>
               </li>
