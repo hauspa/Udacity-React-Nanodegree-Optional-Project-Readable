@@ -22,6 +22,17 @@ class Comments extends Component {
     }))
   }
 
+  displayCommentCount = (count) => {
+    switch (true) {
+      case count === 1:
+        return `1 comment`
+      case count === 0:
+        return `No comments`
+      default:
+        return `${count} comments`
+    }
+  }
+
   render(){
     const { postComments, id } = this.props
     const { isAddMode } = this.state
@@ -46,7 +57,7 @@ class Comments extends Component {
             )
             : (
               <div className='comments mx-auto'>
-                <h3>{filteredComments.length} comments</h3>
+                <h3>{this.displayCommentCount(filteredComments.length)}</h3>
                 {
                   filteredComments.map(comment => (
                     <CommentSwitch comment={comment} key={comment.id} />

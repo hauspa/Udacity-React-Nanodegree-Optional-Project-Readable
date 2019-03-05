@@ -14,6 +14,17 @@ class Post extends Component {
     votePost(post.id, option)
   }
 
+  displayCommentCount = (count) => {
+    switch (true) {
+      case count === 1:
+        return `1 comment`
+      case count === 0:
+        return `No comments`
+      default:
+        return `${count} comments`
+    }
+  }
+
   render(){
     const { post } = this.props
     return(
@@ -23,6 +34,7 @@ class Post extends Component {
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>
+              <h4 className='mt-5'>{this.displayCommentCount(post.commentCount)}</h4>
             </Link>
           </div>
           <div className='col voting d-flex justify-content-center align-items-center'>
