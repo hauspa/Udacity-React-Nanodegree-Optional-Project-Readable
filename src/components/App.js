@@ -138,18 +138,18 @@ function mapStateToProps({ categories, posts }, { location }) {
   const paramCategory = afterFirstSlash.includes('/') ? afterFirstSlash.substring(0, secondSlash) : afterFirstSlash
   const paramId = afterFirstSlash.substring((secondSlash + 1))
 
-  let isValidCategory = false
-  categories.forEach(category => {
-    if(category.name === paramCategory){
-      isValidCategory = true
-    }
-  })
+  // let isValidCategory = false
+  // categories.forEach(category => {
+  //   if(category.name === paramCategory){
+  //     isValidCategory = true
+  //   }
+  // })
+
+  console.log('Categories', categories.includes(paramCategory))
 
   return {
     isLoading: categories.length < 1 || posts.length < 1,
-    // postKeys: Object.keys(posts),
-    // postID: paramId,
-    isValidCategory,
+    isValidCategory: categories.some(category => category.name === paramCategory),
     isValidPost: Object.keys(posts).includes(paramId),
   }
 }
