@@ -8,8 +8,8 @@ Readable App to show and create posts and comments with the ability to use up an
 
 ## How to start & use project
 
-Please use `npm install` and `npm start` to start the project.
-Alternatively you can also use `yarn start` to start the project.
+Please use `npm install` and `npm start` to start the project. <br />
+Alternatively you can also use `yarn start` to start the project. <br /><br />
 In order to use the API server, please go inside to the /api-server folder via `cd api-server` in the Terminal and use `node server`.
 
 <br />
