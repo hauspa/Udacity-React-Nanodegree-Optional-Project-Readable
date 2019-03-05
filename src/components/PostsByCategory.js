@@ -5,7 +5,6 @@ import * as PostsAPI from '../utils/api/posts'
 class PostsByCategory extends Component {
 
   state = {
-    posts: [],
     isLoaded: false,
   }
 
@@ -17,10 +16,10 @@ class PostsByCategory extends Component {
   }
 
   render() {
-    let { posts, isLoaded } = this.state
+    const { isLoaded } = this.state
+    const { posts } = this.props
     return (
       <div>
-        <p>Category</p>
         {
           isLoaded
             ? posts.length > 0
@@ -41,9 +40,11 @@ class PostsByCategory extends Component {
 }
 
 
-function mapStateToProps(state, { match }) {
+function mapStateToProps({ posts }, { match }) {
+  const category = match.params.category
   return {
-    category: match.params.category,
+    category,
+    posts: Object.values(posts).filter(post => post.category === category),
   }
 }
 

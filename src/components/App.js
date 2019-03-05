@@ -27,9 +27,6 @@ const prefixForPosts = '/posts/post/'
 class App extends Component {
 
   componentDidMount = () => {
-    // TESTING API!
-    // this.testAPI()
-
     this.props.getInitialData()
   }
 
@@ -110,7 +107,8 @@ class App extends Component {
             : (
               <Switch>
                 <Route exact path='/' component={Home} />
-                <Route path='/posts/category/:category' component={PostsByCategory} />
+                {/* <Route path='/:category' component={PostsByCategory} /> */}
+                <Route path='/:category' component={Home} />
                 <Route path={`${prefixForPosts}:id/edit`} component={EditPost} />
                 <Route path={`/posts/add`} component={EditPost} />
                 {

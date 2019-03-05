@@ -8,16 +8,16 @@ class Home extends Component {
 
   state = {
     sortByVote: true,
-    activeCategory: '',
+    // activeCategory: '',
   }
 
-  setCategory = (e, category) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      // if category is already active, then set to null again!
-      activeCategory: prevState.activeCategory === category ? '' : category
-    }))
-  }
+  // setCategory = (e, category) => {
+  //   this.setState((prevState) => ({
+  //     ...prevState,
+  //     // if category is already active, then set to null again!
+  //     activeCategory: prevState.activeCategory === category ? '' : category
+  //   }))
+  // }
 
   changeSorting = (byVote) => {
     this.setState((prevState) => ({
@@ -27,12 +27,12 @@ class Home extends Component {
   }
 
   sortPosts = () => {
-    const { posts } = this.props
+    const { posts, category } = this.props
     const { sortByVote, activeCategory } = this.state
     let postsArray = Object.values(posts)
-    if (activeCategory !== '') {
+    if (category !== '') {
       // show only posts for active category
-      postsArray = postsArray.filter(post => post.category === activeCategory)
+      postsArray = postsArray.filter(post => post.category === category)
     }
     // sort by votescore or date
     return sortByVote
@@ -42,12 +42,13 @@ class Home extends Component {
 
   render() {
     const { categories } = this.props
-    const { sortByVote, activeCategory } = this.state
+    const { sortByVote } = this.state
     const sortedPosts = this.sortPosts()
     return (
       <div>
-        <h1 className='text-center my-2'>Readable</h1>
-        <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} />
+        <Link to='' className='logo'><h1 className='text-center my-2'>Readable</h1></Link>
+        {/* <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} /> */}
+        <Categories />
 
         <div className='row py-2 justify-content-center'>
           <nav className='d-flex align-items-center'>
@@ -80,10 +81,12 @@ class Home extends Component {
 }
 
 // TODO: load comments here too, for isLoading?
-function mapStateToProps({ categories, posts }) {
+function mapStateToProps({ categories, posts }, { match }) {
+  const category = match.params.category
   return {
     posts,
     isLoading: categories.length < 1 || posts.length < 1,
+    category: category === undefined ? '' : category
   }
 }
 
