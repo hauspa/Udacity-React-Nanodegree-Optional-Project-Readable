@@ -27,7 +27,7 @@ class EditPost extends Component {
       title: post.title,
       author: post.author,
       body: post.body,
-      category: prevState.category === '' ? categories[0].name : post.category, // if it's still empty, means user just wants the first option!
+      category: post.category,
     }))
   }
 
@@ -54,14 +54,14 @@ class EditPost extends Component {
 
   handleClick = (e) => {
     e.preventDefault()
-    const { title, author, body, category } = this.state
-    const { inEditMode, editPost, addPost, id } = this.props
+    const { title, author, body, category, } = this.state
+    const { inEditMode, editPost, addPost, id, categories, } = this.props
 
     let newPost = {
       author,
       title,
       body,
-      category,
+      category: category === '' ? categories[0].name : category, // if it's still empty, means user just wants the first option!
     }
 
     if (inEditMode) {
