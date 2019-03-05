@@ -20,11 +20,12 @@ class EditPost extends Component {
   }
 
   updateState = (post) => {
-    this.setState(() => ({
+    const { categories } = this.props
+    this.setState((prevState) => ({
       title: post.title,
       author: post.author,
       body: post.body,
-      category: post.category,
+      category: prevState.category === '' ? categories[0].name : post.category, // if it's still empty, means user just wants the first option!
     }))
   }
 
@@ -89,6 +90,7 @@ class EditPost extends Component {
     const { title, author, body, category } = this.state
     const headerText = inEditMode ? 'Edit Post' : 'Add Post'
     const pageText = inEditMode ? 'Save changes' : 'Add Post'
+    const disabled = author === '' || title === '' || body === '' // don't check whether category
 
     return (
       <div>
@@ -135,11 +137,17 @@ class EditPost extends Component {
               <button
                 type="submit"
                 className="btn btn-primary btn-lg"
-                disabled={ author === '' || title === '' || body === '' || category === '' }
+                disabled={disabled}
                 onClick={this.handleClick}>
-                  <Link to={inEditMode ? `/posts/post/${id}` : `/`} className='save'>
-                    {pageText}
-                  </Link>
+                  {
+                    disabled
+                      ? pageText
+                      : (
+                        <Link to={inEditMode ? `/posts/post/${id}` : `/`} className='save'>
+                          {pageText}
+                        </Link>
+                      )
+                  }
               </button>
             {
               inEditMode
@@ -159,7 +167,6 @@ class EditPost extends Component {
 }
 
 function mapStateToProps({ posts, categories }, { match }) {
-  console.log('MATCH edit: ', match)
   return {
     inEditMode: match.path.includes('edit'), // get from URL param whether /posts/add or /posts/:id/edit
     id: match.params.id,

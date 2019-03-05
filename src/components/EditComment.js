@@ -24,7 +24,7 @@ class EditComment extends Component {
     if (inEditMode) {
       loadComment(id)
       // loadComment('008')
-      .then((comment) => this.updateState(comment))
+        .then((comment) => this.updateState(comment))
     }
   }
 
