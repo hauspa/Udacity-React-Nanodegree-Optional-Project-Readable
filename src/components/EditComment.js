@@ -6,6 +6,7 @@ import {
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 // const testID = "8xf0y6ziyjabvozdd253nd"
 // const commentID = "894tuq4ut84ut8v4t8wun89g"
@@ -90,7 +91,8 @@ class EditComment extends Component {
     const { body, author } = this.state
     const { inEditMode } = this.props
     return (
-      <div>
+      <div className='mt-4'>
+        <h4>{inEditMode ? 'Edit Comment' : 'Add Comment'}</h4>
         <form>
           <div className="form-row">
             <div className="form-group col">
@@ -106,10 +108,10 @@ class EditComment extends Component {
             </div>
           </div>
 
-          <div className='row d-flex align-items-center justify-content-end'>
+          <div className='row d-flex align-items-center justify-content-end pt-2 pb-3'>
             <button
               type="submit"
-              className="btn btn-primary btn-lg mx-auto"
+              className="btn btn-primary btn-lg"
               disabled={ body === '' || author === '' }
               onClick={this.handleClick}>
                 {
