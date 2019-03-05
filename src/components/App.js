@@ -3,6 +3,10 @@ import '../App.css'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { handleInitialData } from '../actions/shared'
+import {
+  path_home, path_category,
+  path_editPost, path_addPost, path_detailPost,
+} from '../utils/paths'
 
 // Components
 import Home from './Home'
@@ -30,18 +34,18 @@ class App extends Component {
             ? null
             : (
               <Switch>
-                <Route exact path='/' component={Home} />
+                <Route exact path={path_home} component={Home} />
                 {
                   // check whether Category exists
                   isValidCategory &&
-                    <Route exact path='/:category' component={Home} />
+                    <Route exact path={path_category} component={Home} />
                 }
-                <Route path={`/posts/post/:id/edit`} component={EditPost} />
-                <Route path={`/posts/add`} component={EditPost} />
+                <Route path={path_editPost} component={EditPost} />
+                <Route path={path_addPost} component={EditPost} />
                 {
                   // before going to a page with id, check whether exists
                   isValidCategory && isValidPost &&
-                    <Route path={`/:category/:id`} component={PostPage} />
+                    <Route path={path_detailPost} component={PostPage} />
                 }
                 <Route component={ErrorPage} />
               </Switch>

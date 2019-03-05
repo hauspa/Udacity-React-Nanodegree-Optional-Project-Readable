@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Categories from './Categories'
 import Post from './Post'
+import { path_home, path_addPost } from '../utils/paths'
 
 class Home extends Component {
 
@@ -37,7 +38,7 @@ class Home extends Component {
     const sortedPosts = this.sortPosts()
     return (
       <div>
-        <Link to='' className='logo'><h1 className='text-center my-2'>Readable</h1></Link>
+        <Link to={path_home} className='logo'><h1 className='text-center my-2'>Readable</h1></Link>
 
         <Categories />
 
@@ -51,7 +52,7 @@ class Home extends Component {
         </div>
 
         <div className='row d-flex justify-content-center my-1'>
-          <Link to='/posts/add' className='addButton bg-primary text-center p-3'>
+          <Link to={path_addPost} className='addButton bg-primary text-center p-3'>
             Add new post
           </Link>
         </div>

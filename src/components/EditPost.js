@@ -4,8 +4,9 @@ import * as PostsAPI from '../utils/api/posts'
 import {
   handleEditingPost, handleAddingPost, handleDeletingPost,
 } from '../actions/shared'
+import { Redirect } from 'react-router-dom'
+import { path_home, setPathDetailPost } from '../utils/paths'
 import uuidv1 from 'uuid/v1'
-import { Link, Redirect } from 'react-router-dom'
 import _ from 'lodash/string'
 
 class EditPost extends Component {
@@ -32,10 +33,6 @@ class EditPost extends Component {
 
   componentDidMount = () => {
     const { getPost, inEditMode, id } = this.props
-
-    // TODO: then when it's edit mode, fire the API method with .then to update the state to fill in the form!
-    // TODO: make sure there is no bug/error in console when using API, when the ID doesn't exist!
-    // TODO: if possible, instead of using API, use Redux store
 
     if (inEditMode) {
       // if it's in edit mode, populate fields with the post data
@@ -86,7 +83,7 @@ class EditPost extends Component {
     const { deletePost, id, history } = this.props
     e.preventDefault()
     deletePost(id)
-      .then(() => history.push('/'))
+      .then(() => history.push(path_home))
   }
 
   goBack = (shouldGoToPost) => {
@@ -108,10 +105,10 @@ class EditPost extends Component {
     // imperative routing!
     if (goBack) {
       if(redirectToPost){
-        return <Redirect to={`/${category}/${id}`} />
+        return <Redirect to={setPathDetailPost(category, id)} />
       }
       else{ // go home
-        return <Redirect to='/' />
+        return <Redirect to={path_home} />
       }
     }
 

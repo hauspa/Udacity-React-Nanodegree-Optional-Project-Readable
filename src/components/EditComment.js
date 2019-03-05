@@ -6,7 +6,6 @@ import {
 } from '../actions/shared'
 import uuidv1 from 'uuid/v1'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 class EditComment extends Component {
 

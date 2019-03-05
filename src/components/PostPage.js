@@ -7,6 +7,7 @@ import Comments from './Comments'
 import * as moment from 'moment'
 import { Link } from 'react-router-dom'
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi'
+import { path_home, setPathEditPost } from '../utils/paths'
 
 class PostPage extends Component {
 
@@ -25,7 +26,7 @@ class PostPage extends Component {
             ? null
             : (
               <div>
-                <Link to='/' className='logo text-center my-4'><h1>Readable</h1></Link>
+                <Link to={path_home} className='logo text-center my-4'><h1>Readable</h1></Link>
                 <div className='postPage'>
                   <div className='bg-primary header'>
                     <div className='title'>{post.title || 'Title'}</div>
@@ -46,7 +47,7 @@ class PostPage extends Component {
 
                   <div className='body pt-5 pb-2'>{post.body}</div>
 
-                  <Link to={`/posts/post/${id}/edit`}>
+                  <Link to={setPathEditPost(id)}>
                     <button type='button' className='btn btn-link'>Edit this Post</button>
                   </Link>
                   <br></br>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import _ from 'lodash/string'
+import { path_home, setPathCategory } from '../utils/paths'
 
 class Categories extends Component {
 
@@ -19,7 +20,7 @@ class Categories extends Component {
             categories.map(category => (
               <li key={category.path} className="nav-item px-4">
                 {/* if already active, then go back home to include all categories! */}
-                <Link to={this.isActive(category) ? '/' : `/${category.path}`} className={"nav-link " + (this.isActive(category) ? "active" : "")}>
+                <Link to={this.isActive(category) ? path_home : setPathCategory(category.path)} className={"nav-link " + (this.isActive(category) ? "active" : "")}>
                   {_.capitalize(category.name)}
                 </Link>
               </li>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi'
 import { handleVotingPost } from '../actions/shared'
+import { setPathDetailPost, setPathEditPost } from '../utils/paths'
 
 class Post extends Component {
 
@@ -29,7 +30,7 @@ class Post extends Component {
     return(
         <div className='row post bg-primary'>
           <div className='col flex-1 d-flex align-items-center justify-content-center'>
-            <Link to={`/${post.category}/${post.id}`}>
+            <Link to={setPathDetailPost(post.category, post.id)}>
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>
@@ -41,7 +42,7 @@ class Post extends Component {
               <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn btn-light'><FiChevronUp size={26} /></button>
               <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn btn-light my-1'><FiChevronDown size={26} /></button>
               <div>{post.voteScore}</div>
-              <Link to={`/posts/post/${post.id}/edit`} className='mt-5'>
+              <Link to={setPathEditPost(post.id)} className='mt-5'>
                 <button type='button' className='btn btn-link edit'>Edit</button>
               </Link>
             </div>
