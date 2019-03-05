@@ -46,27 +46,26 @@ class Home extends Component {
     const sortedPosts = this.sortPosts()
     return (
       <div>
-        <br></br>
-        <h1 className='text-center'>Readable</h1>
+        <h1 className='text-center my-2'>Readable</h1>
         <Categories onClickingCategory={this.setCategory} activeCategory={activeCategory} />
 
-        <div className='row dude justify-content-center align-items-center'>
-          <nav>
-            <ul className="pagination justify-content-center">
+        <div className='row py-2 dude justify-content-center'>
+          <nav className='bg-secondary d-flex align-items-center'>
+            <ul className="pagination bg-primary">
               <li className={"page-item " + (sortByVote ? 'active' : '')} onClick={() => this.changeSorting(true)}><button className="page-link">Vote Score</button></li>
               <li className={"page-item " + (sortByVote ? '' : 'active')} onClick={() => this.changeSorting(false)}><button className="page-link">Date</button></li>
             </ul>
           </nav>
         </div>
 
-        <div className='row d-flex justify-content-center'>
-          <Link to='/posts/add' className='addButton bg-warning text-center'>
+        <div className='row d-flex justify-content-center my-1'>
+          <Link to='/posts/add' className='addButton bg-warning text-center py-3'>
             Add new post
           </Link>
         </div>
 
 
-        <div className='row flex-column py-3 align-items-center'>
+        <div className='row flex-column align-items-center'>
           {
             sortedPosts.length > 0
               ? sortedPosts.map(post => (

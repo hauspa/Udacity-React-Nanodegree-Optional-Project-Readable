@@ -8,8 +8,6 @@ import uuidv1 from 'uuid/v1'
 import { Link } from 'react-router-dom'
 import _ from 'lodash/string'
 
-const testID = "8xf0y6ziyjabvozdd253nd"
-
 class EditPost extends Component {
 
   state = {

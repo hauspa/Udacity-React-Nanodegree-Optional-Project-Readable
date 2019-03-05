@@ -1,3 +1,13 @@
+.logo{
+  color: black;
+  font-size: 50px;
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+    color: black;
+  }
+}
+
 .categories{
   // max-width: 1000px;
   margin-left: 50px;
@@ -7,7 +17,7 @@
 .post{
   color: white;
   border-radius: 10px;
-  width: 600px;
+  width: 500px;
   min-height: 200px;
   background-color: coral;
   text-align: center;
@@ -32,6 +42,9 @@
 
 .postPage{
   text-align: center;
+  .header{
+    color: white;
+  }
   .title{
     font-size: 45px;
 
@@ -52,24 +65,30 @@
 }
 
 .comments{
-  width: 600px;
-  background-color: coral;
-}
-
-.comment{
-  background-color: yellow;
-  .voting{
-    // max-width: 40px;
-    background-color: green;
-    font-size: 20px;
+  width: 450px;
+  .comment{
+    border-radius: 10px;
+    .body{
+      font-size: 28px;
+    }
+    .voting{
+      color: black;
+      font-size: 24px;
+    }
   }
 }
 
+
 .addButton{
-  width: 600px;
+  // width: 300px;
   border-radius: 10px;
   font-size: 28px;
   text-decoration: none;
+  color: white;
+  &:hover{
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .delete{

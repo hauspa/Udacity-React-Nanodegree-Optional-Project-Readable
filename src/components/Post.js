@@ -27,8 +27,8 @@ class Post extends Component {
           </div>
           <div className='col voting'>
             <div className='row flex-column'>
-              <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn'><FiChevronUp /></button>
-              <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn'><FiChevronDown /></button>
+              <button onClick={(e) => this.handlePostVote(e, 'upVote')} className='btn btn-light'><FiChevronUp size={26} /></button>
+              <button onClick={(e) => this.handlePostVote(e, 'downVote')} className='btn btn-light my-1'><FiChevronDown size={26} /></button>
               <div>{post.voteScore}</div>
             </div>
           </div>

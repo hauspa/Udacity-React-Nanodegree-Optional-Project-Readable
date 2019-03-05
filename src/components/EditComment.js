@@ -20,7 +20,6 @@ class EditComment extends Component {
 
     if (inEditMode) {
       loadComment(id)
-      // loadComment('008')
         .then((comment) => this.updateState(comment))
     }
   }
@@ -135,13 +134,7 @@ EditComment.propTypes = {
   inEditMode: PropTypes.bool.isRequired,
 }
 
-function mapStateToProps() {
-  return {
-    // TODO: determine whether edit or add mode via url param id
-    // inEditMode: true,
-    // commentID
-  }
-}
+function mapStateToProps() {return {}}
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -16,46 +16,24 @@ class Comment extends Component {
   render(){
     const { comment, onClickingEdit } = this.props
     return (
-      // <div className='comment w-100 my-3'>
-      //   <div className=''>
-      //     <div className=' bg-success'>
-      //       {comment.author} commented on {moment(comment.timestamp).format('MMM Do YYYY')}
-      //     </div>
-      //     <div className='row voting py-3'>
-      //       <div className='col d-flex justify-content-end align-items-center'>
-      //         <div>{comment.voteScore}</div>
-      //       </div>
-      //       <div className='col'>
-      //         <div className='row flex-column align-items-start'>
-      //           <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')} className='btn bg-warning'><FiChevronUp /></button>
-      //           <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')} className='btn bg-warning'><FiChevronDown /></button>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   </div>
-      //   <div className='flex-column'>
-      //     <div className='py-3'>{comment.body}</div>
-      //     <button onClick={onClickingEdit} type='button' className='btn bg-link'>Edit Comment</button>
-      //   </div>
-      // </div>
-      <div className='comment row py-3'>
-        <div className='col-11 bg-primary'>
-          <div className='bg-secondary'>
+      <div className='comment row my-3 border'>
+        <div className='col-10'>
+          <div className='pt-2'>
             {comment.author} commented on {moment(comment.timestamp).format('MMM Do YYYY')}
           </div>
-          <div className='bg-danger py-4'>
+          <div className='py-4 body'>
             {comment.body}
           </div>
           <div>
             <button onClick={onClickingEdit} type='button' className='btn bg-link'>Edit Comment</button>
           </div>
         </div>
-        <div className='col-1 bg-success'>
+        <div className='col-2'>
           <div className='row voting py-3'>
-            <div className='col'>
+            <div className='col mr-2'>
               <div className='row flex-column justify-content-center align-items-center'>
-                <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')} className='btn bg-warning'><FiChevronUp /></button>
-                <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')} className='btn bg-warning'><FiChevronDown /></button>
+                <button onClick={(e) => this.handleCommentVote(e, comment.id, 'upVote')} className='btn bg-light'><FiChevronUp size={26} /></button>
+                <button onClick={(e) => this.handleCommentVote(e, comment.id, 'downVote')} className='btn bg-light my-1'><FiChevronDown size={26} /></button>
               </div>
               <div className='col d-flex justify-content-center align-items-center'>
                 <div>{comment.voteScore}</div>
