@@ -32,7 +32,6 @@ Categories.propTypes = {
 }
 
 function mapStateToProps({ categories }, { match }) {
-  console.log('MATCH: ', match)
   return {
     categories,
     activeCategory: match.params.category,

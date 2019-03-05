@@ -30,7 +30,7 @@ class Post extends Component {
     return(
         <div className='row post bg-primary'>
           <div className='col flex-1 d-flex align-items-center justify-content-center'>
-            <Link to={`/posts/post/${post.id}`}>
+            <Link to={`/${post.category}/${post.id}`}>
               <div className='title'>{post.title}</div>
               <h5>by</h5>
               <h4>{post.author}</h4>

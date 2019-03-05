@@ -108,13 +108,14 @@ class App extends Component {
               <Switch>
                 <Route exact path='/' component={Home} />
                 {/* <Route path='/:category' component={PostsByCategory} /> */}
-                <Route path='/:category' component={Home} />
+                {/* TODO: if Category or ID doesn't exist -> 404 Page! */}
+                <Route exact path='/:category' component={Home} />
                 <Route path={`${prefixForPosts}:id/edit`} component={EditPost} />
                 <Route path={`/posts/add`} component={EditPost} />
                 {
                   // before going to a page with id, check whether exists
                   postKeys.includes(postID) &&
-                    <Route path={`${prefixForPosts}:id`} component={PostPage} />
+                    <Route path={`/:category/:id`} component={PostPage} />
                 }
                 <Route component={ErrorPage} />
               </Switch>
@@ -128,10 +129,13 @@ class App extends Component {
 // TODO: add comments in mapStateToProps as well? in case directly access post page?
 function mapStateToProps({ categories, posts }, { location }) {
   // match is only in props when component is passed on via <Route>, so gotta use location & withRouter!
+  const removeFirstSlash = location.pathname.substring('/'.length)
+  const secondSlash = removeFirstSlash.indexOf('/')
+  const id = removeFirstSlash.substring((secondSlash + 1))
   return {
     isLoading: categories.length < 1 || posts.length < 1,
     postKeys: Object.keys(posts),
-    postID: location.pathname.substring(prefixForPosts.length)
+    postID: id,
   }
 }
 
