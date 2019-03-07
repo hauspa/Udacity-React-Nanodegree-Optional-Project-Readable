@@ -1,8 +1,8 @@
 # Project Description
 
-Optional Project for Udacity's React Nanodegree, with a focus on Redux.
+Readable web app built using React and Redux. The app communicates with a Node server and saves data in Redux as well as on the server. Users can create posts and comment on a post. Users can also then upvote or downvote a post or comment to their liking. Posts can be shown and filtered by category. 
 
-Readable App to show and create posts and comments with the ability to use up and downvote. This app uses React & Redux.
+A project for Udacity's React Nanodegree, with a focus on Redux.
 
 <br />
 
