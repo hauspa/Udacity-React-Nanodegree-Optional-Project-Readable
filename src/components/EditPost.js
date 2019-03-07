@@ -99,7 +99,7 @@ class EditPost extends Component {
     const { title, author, body, category, goBack, redirectToPost } = this.state
     const headerText = inEditMode ? 'Edit Post' : 'Add Post'
     const pageText = inEditMode ? 'Save changes' : 'Add Post'
-    const disabled = author === '' || title === '' || body === '' // don't check whether category
+    const disabled = author.trim() === '' || title.trim() === '' || body.trim() === '' // don't check whether category
 
     // imperative routing!
     if (goBack) {
